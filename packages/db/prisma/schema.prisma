@@ -1,0 +1,287 @@
+// One case model, one entry-point field. See docs/spec/01-domain-model.md.
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ---- Enums -------------------------------------------------------------
+
+enum Role {
+  ADMIN
+  INTERN
+  LAWYER
+  BACKER
+  PUBLIC
+}
+
+enum VolunteerRole {
+  LAWYER
+  VERIFIER
+  CASE_MANAGER
+  COMMS
+}
+
+enum Availability {
+  AVAILABLE
+  BUSY
+  AWAY
+}
+
+enum EntryType {
+  FUNDED
+  DISPATCHED
+}
+
+enum Stage {
+  SUBMITTED
+  SCREENING
+  APPROVED
+  REJECTED
+  LIVE
+  FUNDED
+  EXPIRED
+  AWAITING_FUNDS
+  DISPATCHED
+  ASSIGNED
+  FILED
+  IN_PROGRESS
+  RESOLVED
+  CLOSED
+}
+
+enum Category {
+  CIVIL_LIBERTIES
+  ENVIRONMENT
+  LABOR
+  CONSUMER
+  OTHER
+}
+
+enum Track {
+  CAMPAIGN
+  RESPONSE
+}
+
+enum BackerKind {
+  FOLLOWER
+  BACKER
+}
+
+enum ContributionStatus {
+  PENDING
+  CAPTURED
+  REFUNDED
+}
+
+enum AssignmentKind {
+  PRIMARY
+  SUPPORT
+}
+
+enum AssignmentStatus {
+  ACTIVE
+  RELEASED
+}
+
+enum LedgerType {
+  CONTRIBUTION
+  REFUND
+  RESPONSE_DRAW
+  REPLENISHMENT
+  FEE
+  DISBURSEMENT
+  SURPLUS_SWEEP
+}
+
+enum DisbursementCategory {
+  COURT_FEE
+  LAWYER_DISBURSEMENT
+  FILING
+  MISC
+}
+
+// ---- Models ------------------------------------------------------------
+
+model User {
+  id           String     @id @default(cuid())
+  email        String     @unique
+  name         String?
+  passwordHash String?
+  role         Role       @default(PUBLIC)
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+  volunteer    Volunteer?
+}
+
+model Volunteer {
+  id               String     @id @default(cuid())
+  userId           String     @unique
+  user             User       @relation(fields: [userId], references: [id])
+  role             VolunteerRole
+  skills           String[]
+  region           String?
+  availability     Availability @default(AVAILABLE)
+  capacityLimit    Int        @default(5)
+  hoursContributed Int        @default(0)
+  assignments      Assignment[]
+  createdAt        DateTime   @default(now())
+  updatedAt        DateTime   @updatedAt
+}
+
+model Case {
+  id            String     @id @default(cuid())
+  entryType     EntryType
+  title         String
+  summary       String
+  description   String?
+  category      Category
+  region        String?
+  stage         Stage
+  goalAmountPaise Int
+  deadlineAt    DateTime?
+  publishedAt   DateTime?
+  activeSinceAt DateTime?
+  createdAt     DateTime   @default(now())
+  updatedAt     DateTime   @updatedAt
+
+  submission    Submission?
+  screening     Screening?
+  backers       Backer[]
+  contributions Contribution[]
+  assignments   Assignment[]
+  updates       CaseUpdate[]
+  ledgerEntries LedgerEntry[]
+  disbursements Disbursement[]
+
+  @@index([stage])
+  @@index([entryType])
+}
+
+model Submission {
+  id            String   @id @default(cuid())
+  case          Case     @relation(fields: [caseId], references: [id], onDelete: Cascade)
+  caseId        String   @unique
+  track         Track
+  whatHappened  String
+  where         String?
+  when          String?
+  applicantName String?
+  contact       String?
+  onBehalfOf    String?
+  isAnonymous   Boolean  @default(false)
+  createdAt     DateTime @default(now())
+}
+
+model Screening {
+  id                  String   @id @default(cuid())
+  case                Case     @relation(fields: [caseId], references: [id], onDelete: Cascade)
+  caseId              String   @unique
+  completenessPassed  Boolean  @default(false)
+  duplicateOfCaseId   String?
+  isEligible          Boolean?
+  reason              String?
+  decidedBy           String?
+  decidedAt           DateTime?
+  createdAt           DateTime @default(now())
+}
+
+model Backer {
+  id        String     @id @default(cuid())
+  case      Case       @relation(fields: [caseId], references: [id], onDelete: Cascade)
+  caseId    String
+  kind      BackerKind
+  userId    String?
+  createdAt DateTime   @default(now())
+
+  @@index([caseId])
+}
+
+model Contribution {
+  id               String             @id @default(cuid())
+  case             Case               @relation(fields: [caseId], references: [id])
+  caseId           String
+  backerId         String?
+  grossAmountPaise Int
+  totalFeePaise    Int                @default(0)
+  gatewayFeePaise  Int                @default(0)
+  platformFeePaise Int                @default(0)
+  netToCasePaise   Int
+  status           ContributionStatus @default(PENDING)
+  razorpayOrderId  String?
+  createdAt        DateTime           @default(now())
+
+  @@index([caseId])
+  @@index([status])
+}
+
+model CaseUpdate {
+  id        String   @id @default(cuid())
+  case      Case     @relation(fields: [caseId], references: [id], onDelete: Cascade)
+  caseId    String
+  authorId  String?
+  title     String
+  body      String
+  published Boolean  @default(true)
+  createdAt DateTime @default(now())
+
+  @@index([caseId])
+}
+
+model Assignment {
+  id          String           @id @default(cuid())
+  case        Case             @relation(fields: [caseId], references: [id])
+  volunteer   Volunteer        @relation(fields: [volunteerId], references: [id])
+  caseId      String
+  volunteerId String
+  kind        AssignmentKind   @default(PRIMARY)
+  status      AssignmentStatus @default(ACTIVE)
+  assignedAt  DateTime         @default(now())
+
+  @@unique([caseId, volunteerId])
+  @@index([volunteerId])
+}
+
+model LedgerEntry {
+  id          String     @id @default(cuid())
+  type        LedgerType
+  case        Case?      @relation(fields: [caseId], references: [id])
+  caseId      String?
+  amountPaise Int
+  category    String?
+  note        String?
+  createdAt   DateTime   @default(now())
+
+  @@index([caseId])
+}
+
+model Disbursement {
+  id               String               @id @default(cuid())
+  case             Case                 @relation(fields: [caseId], references: [id])
+  caseId           String
+  category         DisbursementCategory
+  amountPaise      Int
+  approvedBy       String?
+  approvedAt       DateTime?
+  signoffRequired  Boolean              @default(false)
+  createdAt        DateTime             @default(now())
+
+  @@index([caseId])
+}
+
+// Durable trail. Not FK-constrained on purpose: the log must outlive the case row.
+model AuditLog {
+  id          String   @id @default(cuid())
+  action      String
+  actorId     String?
+  caseId      String?
+  amountPaise Int?
+  reason      String
+  meta        Json?
+  createdAt   DateTime @default(now())
+
+  @@index([caseId, createdAt])
+}

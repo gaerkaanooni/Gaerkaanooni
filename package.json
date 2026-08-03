@@ -1,0 +1,31 @@
+{
+  "name": "pil-promax",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Back public interest litigation with real commitment.",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "npm run dev --workspace @pil/web",
+    "build": "npm run build --workspace @pil/web",
+    "typecheck": "npm run typecheck --workspaces --if-present",
+    "lint": "eslint .",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:e2e": "playwright test -c apps/web/playwright.config.ts",
+    "test:db": "bash scripts/setup-test-db.sh",
+    "db:seed": "tsx packages/db/prisma/seed.ts"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.28.0",
+    "@playwright/test": "^1.54.1",
+    "@types/node": "^22.15.0",
+    "eslint": "^9.28.0",
+    "tsx": "^4.23.1",
+    "typescript": "^5.8.3",
+    "typescript-eslint": "^8.34.0",
+    "vitest": "^3.2.4"
+  }
+}
