@@ -1,0 +1,287 @@
+{
+  "version": 1,
+  "skills": {
+    "ab-test-setup": {
+      "source": "manojbajaj95/claude-gtm-plugin",
+      "sourceType": "github",
+      "skillPath": "skills/ab-test-setup/SKILL.md",
+      "computedHash": "751d8331822c17993070dc1dbb8c4094ea8456fabdadca11caf76ccd41261fa1"
+    },
+    "app-store-optimization": {
+      "source": "manojbajaj95/claude-gtm-plugin",
+      "sourceType": "github",
+      "skillPath": "skills/app-store-optimization/SKILL.md",
+      "computedHash": "b63e7a198dfdbbc7e2a2413645ed52f088c10852aaa4b9ca53c6876fe22ce9e1"
+    },
+    "blog-writing-specialist": {
+      "source": "manojbajaj95/claude-gtm-plugin",
+      "sourceType": "github",
+      "skillPath": "skills/blog-writing-specialist/SKILL.md",
+      "computedHash": "4a88826183e24a2d6d27d467a82cab393a5711c6e7d48662882f5f1b66333faa"
+    },
+    "bootstrap": {
+      "source": "manojbajaj95/claude-gtm-plugin",
+      "sourceType": "github",
+      "skillPath": "skills/bootstrap/SKILL.md",
+      "computedHash": "3d85b15b870b9fcf9f9c92e7e655f14533170508759079774790c1381c124332"
+    },
+    "challenge-funnel": {
+      "source": "manojbajaj95/claude-gtm-plugin",
+      "sourceType": "github",
+      "skillPath": "skills/challenge-funnel/SKILL.md",
+      "computedHash": "9141a4c15d65ea4a9f3ba16c38172feba85afc523a26bcd49dc41dbaabb5ee88"
+    },
+    "community-building": {
+      "source": "manojbajaj95/claude-gtm-plugin",
+      "sourceType": "github",
+      "skillPath": "skills/community-building/SKILL.md",
+      "computedHash": "72727499ed62a08f5cdc49a7d5d995eebfa599de2761e9e555a24f639ade20ac"
+    },
+    "competitor-analysis": {
+      "source": "manojbajaj95/claude-gtm-plugin",
+      "sourceType": "github",
+      "skillPath": "skills/competitor-analysis/SKILL.md",
+      "computedHash": "4700acee399b2de314ce4f4bc5f7f6cc87b2861c284851e894d0613053ecf791"
+    },
+    "content-creation-and-marketing": {
+      "source": "manojbajaj95/claude-gtm-plugin",
+      "sourceType": "github",
+      "skillPath": "skills/content-creation-and-marketing/SKILL.md",
+      "computedHash": "1fa2ff896c5be339cc0e2459ce627c49bbc142738401f38e68e44d32e5b389d9"
+    },
+    "content-strategy-and-planning": {
+      "source": "manojbajaj95/claude-gtm-plugin",
+      "sourceType": "github",
+      "skillPath": "skills/content-strategy-and-planning/SKILL.md",
+      "computedHash": "f711eb1413504356de4b67ebdc8f5a47ddc1b41dfa308c71997a48c568e3f3e9"
+    },
+    "conversion-rate-optimization": {
+      "source": "manojbajaj95/claude-gtm-plugin",
+      "sourceType": "github",
+      "skillPath": "skills/conversion-rate-optimization/SKILL.md",
+      "computedHash": "71478f5f17737fa43a407336196bcddca331a98ac2cb7c88c53def92405090e7"
+    },
+    "copywriting-core": {
+      "source": "manojbajaj95/claude-gtm-plugin",
+      "sourceType": "github",
+      "skillPath": "skills/copywriting-core/SKILL.md",
+      "computedHash": "b6ff8cc4264a45d336cda8467d40d4b98d742554bb94a830e6a60328f764bf7c"
+    },
+    "crm-integration": {
+      "source": "manojbajaj95/claude-gtm-plugin",
+      "sourceType": "github",
+      "skillPath": "skills/crm-integration/SKILL.md",
+      "computedHash": "b8bb5df1fd14661168e7e89dcc65c90bf37d13e2e6e11df29238909bbe0e68f0"
+    },
+    "customer-success-and-retention": {
+      "source": "manojbajaj95/claude-gtm-plugin",
+      "sourceType": "github",
+      "skillPath": "skills/customer-success-and-retention/SKILL.md",
+      "computedHash": "eab08e790524dbb3c1674efd058fd43738d2e9d054379dcb92a25a7b19420bb9"
+    },
+    "data-and-funnel-analytics": {
+      "source": "manojbajaj95/claude-gtm-plugin",
+      "sourceType": "github",
+      "skillPath": "skills/data-and-funnel-analytics/SKILL.md",
+      "computedHash": "26109bdd219527b9072acf8c609ca5f0e132fd346ede9ac4051433543d6f28e0"
+    },
+    "executive-dashboard-generator": {
+      "source": "manojbajaj95/claude-gtm-plugin",
+      "sourceType": "github",
+      "skillPath": "skills/executive-dashboard-generator/SKILL.md",
+      "computedHash": "51baa63eda3def3c0c6d33ae2faa5f6fd6e316af80c0aa7139e2efe8b41f6430"
+    },
+    "free-tool-strategy": {
+      "source": "manojbajaj95/claude-gtm-plugin",
+      "sourceType": "github",
+      "skillPath": "skills/free-tool-strategy/SKILL.md",
+      "computedHash": "936765faadb421f88f1c24d199f2afd2e697edb23b93df280ecae8ac2b0fcd03"
+    },
+    "go-to-market-strategy": {
+      "source": "manojbajaj95/claude-gtm-plugin",
+      "sourceType": "github",
+      "skillPath": "skills/go-to-market-strategy/SKILL.md",
+      "computedHash": "69974141e35a41549f1e8361671b9b70d795663ce8b257db4d90bc2f5b68483f"
+    },
+    "growth-strategy": {
+      "source": "manojbajaj95/claude-gtm-plugin",
+      "sourceType": "github",
+      "skillPath": "skills/growth-strategy/SKILL.md",
+      "computedHash": "9c474b9d49275d43658dfeb01618fbb388dc1ff697bc8ba393c5d8f028b1bc7c"
+    },
+    "issue-reporting": {
+      "source": "manojbajaj95/claude-gtm-plugin",
+      "sourceType": "github",
+      "skillPath": "skills/issue-reporting/SKILL.md",
+      "computedHash": "41c7dd0036222bfc291614df286b14a9b2f6d1d35bbf34506e86fba41c68fae6"
+    },
+    "keyword-research-and-clustering": {
+      "source": "manojbajaj95/claude-gtm-plugin",
+      "sourceType": "github",
+      "skillPath": "skills/keyword-research-and-clustering/SKILL.md",
+      "computedHash": "bbaad6d1cbd964355ead3146f10e571624e689e02be1b6c054f52663048c6327"
+    },
+    "landing-page-optimization": {
+      "source": "manojbajaj95/claude-gtm-plugin",
+      "sourceType": "github",
+      "skillPath": "skills/landing-page-optimization/SKILL.md",
+      "computedHash": "45310a950a5e72047588fcfb8c9dae930b0057d8e094f1d21ab2829393d967e6"
+    },
+    "lead-generation-and-demand": {
+      "source": "manojbajaj95/claude-gtm-plugin",
+      "sourceType": "github",
+      "skillPath": "skills/lead-generation-and-demand/SKILL.md",
+      "computedHash": "b9ac24ad7148f29353de5f1259bcaa322dfadf51c178440621cfc168a9ff3ebc"
+    },
+    "linkedin": {
+      "source": "manojbajaj95/claude-gtm-plugin",
+      "sourceType": "github",
+      "skillPath": "skills/linkedin/SKILL.md",
+      "computedHash": "30dba213dfe2f4891f05aae1fa09cd190fbf89ea17d837031409742c883ebd1f"
+    },
+    "market-research-analysis": {
+      "source": "manojbajaj95/claude-gtm-plugin",
+      "sourceType": "github",
+      "skillPath": "skills/market-research-analysis/SKILL.md",
+      "computedHash": "9961163fbafffcce0f9641b728fdef2849bcfa682dc1d992c7fa472bf32712ad"
+    },
+    "marketing-automation": {
+      "source": "manojbajaj95/claude-gtm-plugin",
+      "sourceType": "github",
+      "skillPath": "skills/marketing-automation/SKILL.md",
+      "computedHash": "d032ea3be5610c09ccbc1c9c7617aed415c4982eb1b0de33a2bc00c1b891b530"
+    },
+    "marketing-campaign-management": {
+      "source": "manojbajaj95/claude-gtm-plugin",
+      "sourceType": "github",
+      "skillPath": "skills/marketing-campaign-management/SKILL.md",
+      "computedHash": "249b0a4b38dbf8712c9929d31cd526927a594a37958f2046e0665a5574ddb579"
+    },
+    "marketing-strategy": {
+      "source": "manojbajaj95/claude-gtm-plugin",
+      "sourceType": "github",
+      "skillPath": "skills/marketing-strategy/SKILL.md",
+      "computedHash": "d6b9fdd30e053007d917369c40e4bb9091db8042c8b546f4f47a9891cff7f721"
+    },
+    "outbound-email-strategy": {
+      "source": "manojbajaj95/claude-gtm-plugin",
+      "sourceType": "github",
+      "skillPath": "skills/outbound-email-strategy/SKILL.md",
+      "computedHash": "eecd19f97ef9ea1534bf8f827807caf5b1344530974d4be014e1009da1d94a22"
+    },
+    "personalization-at-scale": {
+      "source": "manojbajaj95/claude-gtm-plugin",
+      "sourceType": "github",
+      "skillPath": "skills/personalization-at-scale/SKILL.md",
+      "computedHash": "1d0b9f691bd58e2141cf7816d06208be57750939fbcbc5d30154e68ea4bb926b"
+    },
+    "ph-community-outreach": {
+      "source": "manojbajaj95/claude-gtm-plugin",
+      "sourceType": "github",
+      "skillPath": "skills/ph-community-outreach/SKILL.md",
+      "computedHash": "cb46340bcde8bd0634ec07ca86fc6d15f74f33d898a26454c00e67eca36e2628"
+    },
+    "ph-content-recycling": {
+      "source": "manojbajaj95/claude-gtm-plugin",
+      "sourceType": "github",
+      "skillPath": "skills/ph-content-recycling/SKILL.md",
+      "computedHash": "f46a7c37c16c1c00aee561212360bbd2a31529007f28aa517d525dc5372f61ce"
+    },
+    "pr-specialist": {
+      "source": "manojbajaj95/claude-gtm-plugin",
+      "sourceType": "github",
+      "skillPath": "skills/pr-specialist/SKILL.md",
+      "computedHash": "b5ace8e4e13d617eb6656e77ef5eaed9d9bd310d5a786bfc94fcc42ca69ff901"
+    },
+    "pricing-strategy": {
+      "source": "manojbajaj95/claude-gtm-plugin",
+      "sourceType": "github",
+      "skillPath": "skills/pricing-strategy/SKILL.md",
+      "computedHash": "a9e2bc62080440977b8de309e623b8dfde94f210960506e0dfaace1f807fab6c"
+    },
+    "product-hunt-launch": {
+      "source": "manojbajaj95/claude-gtm-plugin",
+      "sourceType": "github",
+      "skillPath": "skills/product-hunt-launch/SKILL.md",
+      "computedHash": "f0b7def5703f5d4c790ea179155ca285232072f9e950ae28c32e05af0c92f07b"
+    },
+    "product-market-fit-analysis": {
+      "source": "manojbajaj95/claude-gtm-plugin",
+      "sourceType": "github",
+      "skillPath": "skills/product-market-fit-analysis/SKILL.md",
+      "computedHash": "718baceea3a77a39bbfc72449a775e4d3884affba9e690eaba5715a7456059ec"
+    },
+    "qr-code-generator": {
+      "source": "manojbajaj95/claude-gtm-plugin",
+      "sourceType": "github",
+      "skillPath": "skills/qr-code-generator/SKILL.md",
+      "computedHash": "53054981ff5c3fb03cedc42825012b73b2748aada8a022a5163e64d4cb530152"
+    },
+    "referral-program": {
+      "source": "manojbajaj95/claude-gtm-plugin",
+      "sourceType": "github",
+      "skillPath": "skills/referral-program/SKILL.md",
+      "computedHash": "236987dfe71ecfd2ca2bc7eee6066a8ab6a7e7c99850aa4c9a3266579d24783a"
+    },
+    "sales-and-revenue-operations": {
+      "source": "manojbajaj95/claude-gtm-plugin",
+      "sourceType": "github",
+      "skillPath": "skills/sales-and-revenue-operations/SKILL.md",
+      "computedHash": "4d28a9b0c38fc21a0575402ebe145130dd8012311910c0ff3e312869b8e70c31"
+    },
+    "seo-and-aeo-strategy": {
+      "source": "manojbajaj95/claude-gtm-plugin",
+      "sourceType": "github",
+      "skillPath": "skills/seo-and-aeo-strategy/SKILL.md",
+      "computedHash": "459fff5362d476af72ba924f9f93e55be9f8a32077054448c5d9485194e931e3"
+    },
+    "skill-navigator": {
+      "source": "manojbajaj95/claude-gtm-plugin",
+      "sourceType": "github",
+      "skillPath": "skills/skill-navigator/SKILL.md",
+      "computedHash": "35a33c855655f3d28b1ece0d4b7743c7b733638d756625532a3edfeaf0d67a94"
+    },
+    "slide-outline": {
+      "source": "manojbajaj95/claude-gtm-plugin",
+      "sourceType": "github",
+      "skillPath": "skills/slide-outline/SKILL.md",
+      "computedHash": "b14a7062df8557b0b0d682e9e2ad8de430c84beafd8399495588270f0ab18a9c"
+    },
+    "social-media-management": {
+      "source": "manojbajaj95/claude-gtm-plugin",
+      "sourceType": "github",
+      "skillPath": "skills/social-media-management/SKILL.md",
+      "computedHash": "31b2b1a8263feb75b80e7a85eb9b955e89b7e49469b630cca1416017dd1db797"
+    },
+    "user-onboarding": {
+      "source": "manojbajaj95/claude-gtm-plugin",
+      "sourceType": "github",
+      "skillPath": "skills/user-onboarding/SKILL.md",
+      "computedHash": "457ef428754c95b497c27a86a27f2be97861a3b40b8031944c13898a186cc83a"
+    },
+    "utm-builder": {
+      "source": "manojbajaj95/claude-gtm-plugin",
+      "sourceType": "github",
+      "skillPath": "skills/utm-builder/SKILL.md",
+      "computedHash": "16d5743f847da7ab239c7134265161bdbfa5bca107ae6dab1191d086e67a43bf"
+    },
+    "x-impact-checker": {
+      "source": "manojbajaj95/claude-gtm-plugin",
+      "sourceType": "github",
+      "skillPath": "skills/x-impact-checker/SKILL.md",
+      "computedHash": "42c6d4cd3e5c8b07dcd52460e1b6ac8398f838e310801ef0af926b3023969dc9"
+    },
+    "youtube-content": {
+      "source": "manojbajaj95/claude-gtm-plugin",
+      "sourceType": "github",
+      "skillPath": "skills/youtube-content/SKILL.md",
+      "computedHash": "f8412e554967ba2834c0fac9144c4b974096f9e9a9d5a46bbe3b7cec63c33264"
+    },
+    "youtube-research": {
+      "source": "manojbajaj95/claude-gtm-plugin",
+      "sourceType": "github",
+      "skillPath": "skills/youtube-research/SKILL.md",
+      "computedHash": "e7dcd8fa9ee0d49fab2b0df79261abee3568f025d3b19dec0e0229193f02566e"
+    }
+  }
+}
