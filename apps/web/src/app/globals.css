@@ -850,9 +850,8 @@ form button {
   overflow: hidden;
   background: var(--seal);
   color: var(--paper-light);
-  border: 2px solid var(--ink);
+  border-bottom: 2px solid var(--ink);
   box-shadow: 0 4px 0 0 var(--marigold);
-  margin: -20px -20px 34px;
   padding: 8px 0;
   font-family: var(--font-mono);
   font-size: 12px;

@@ -20,10 +20,11 @@ export default async function Home() {
   }).format(raisedPaise / PAISE)
 
   return (
-    <main>
+    <>
       <LandingBanner />
-      <section className="hero reveal">
-        <p className="kicker">Public Interest Litigation · docket № {String(campaigns.length).padStart(4, '0')}</p>
+      <main>
+        <section className="hero reveal">
+          <p className="kicker">Public Interest Litigation · docket № {String(campaigns.length).padStart(4, '0')}</p>
         <h1>Gaerkaanooni</h1>
         <p className="lede">
           Public interest cases need money to make it to the courtroom. Pledge what you can afford — you are only
@@ -87,6 +88,7 @@ export default async function Home() {
           Read the full story →
         </a>
       </div>
-    </main>
+      </main>
+    </>
   )
 }
