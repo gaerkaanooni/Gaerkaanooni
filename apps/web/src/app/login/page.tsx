@@ -1,7 +1,7 @@
 import LoginGate from '@/components/LoginGate'
 
 export const metadata = {
-  title: 'Sign in — PIL Promax',
+  title: 'Sign in — Gaerkaanooni',
 }
 
 export default function LoginPage() {

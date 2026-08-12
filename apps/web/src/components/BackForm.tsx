@@ -88,7 +88,7 @@ export default function BackForm({ campaignId }: { campaignId: string }) {
         key: body.razorpayKeyId,
         amount: body.amountPaise,
         currency: body.currency ?? 'INR',
-        name: 'PIL Promax',
+        name: 'Gaerkaanooni',
         order_id: body.razorpayOrderId,
         handler: async (response: RazorpayResponse) => {
           await confirmPayment(body.id, {

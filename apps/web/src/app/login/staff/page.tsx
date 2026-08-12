@@ -1,7 +1,7 @@
 import LoginForm from '@/components/LoginForm'
 
 export const metadata = {
-  title: 'Staff sign-in — PIL Promax',
+  title: 'Staff sign-in — Gaerkaanooni',
 }
 
 export default function StaffLoginPage() {

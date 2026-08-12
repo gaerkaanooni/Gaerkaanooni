@@ -11,7 +11,7 @@ const ITEMS = [
 export default function LandingBanner() {
   const strip = [...ITEMS, ...ITEMS]
   return (
-    <div className="banner" aria-label="How PIL Promax works at a glance">
+    <div className="banner" aria-label="How Gaerkaanooni works at a glance">
       <div className="banner-track">
         {strip.map((t, i) => (
           <span className="banner-item" key={i}>

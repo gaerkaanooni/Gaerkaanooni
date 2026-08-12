@@ -31,7 +31,7 @@ const devanagari = Tiro_Devanagari_Hindi({
 })
 
 export const metadata: Metadata = {
-  title: 'PIL Promax',
+  title: 'Gaerkaanooni',
   description: "Back public interest litigation with real commitment. Change.org's reach, Kickstarter's commitment.",
 }
 

@@ -24,7 +24,7 @@ export default async function Home() {
       <LandingBanner />
       <section className="hero reveal">
         <p className="kicker">Public Interest Litigation · docket № {String(campaigns.length).padStart(4, '0')}</p>
-        <h1>PIL Promax</h1>
+        <h1>Gaerkaanooni</h1>
         <p className="lede">
           Public interest cases need money to make it to the courtroom. Pledge what you can afford — you are only
           charged if the campaign reaches its goal, and if it does not, every backer is refunded in full.
@@ -78,7 +78,7 @@ export default async function Home() {
 
       <div className="about-teaser reveal">
         <p className="kicker">The founding story</p>
-        <h2>Why PIL Promax exists</h2>
+        <h2>Why Gaerkaanooni exists</h2>
         <p>
           Courts are the last defence of the defenceless — but good lawyering is expensive, and public interest cases
           rarely have deep pockets. We are building a different kind of funder: the public, organised with rigour.

@@ -76,7 +76,7 @@ test('rejects a submission with missing required fields', async ({ request }) =>
 
 test('home page renders', async ({ page }) => {
   await page.goto('/')
-  await expect(page.getByRole('heading', { level: 1 })).toHaveText('PIL Promax')
+  await expect(page.getByRole('heading', { level: 1 })).toHaveText('Gaerkaanooni')
 })
 
 test('health endpoint reports platform config', async ({ request }) => {

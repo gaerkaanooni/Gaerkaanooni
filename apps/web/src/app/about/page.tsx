@@ -1,5 +1,5 @@
 export const metadata = {
-  title: 'About — PIL Promax',
+  title: 'About — Gaerkaanooni',
 }
 
 const PRINCIPLES = [
@@ -40,7 +40,7 @@ export default function AboutPage() {
     <main>
       <section className="hero reveal">
         <p className="kicker">Who we are · what we do</p>
-        <h1>About PIL Promax</h1>
+        <h1>About Gaerkaanooni</h1>
         <p className="lede">
           Courts are the last defence of the defenceless. We exist to make sure good public interest cases — and the
           people who bring them — are never stopped by the cost of a good lawyer.
@@ -172,11 +172,12 @@ export default function AboutPage() {
 
       <div className="about-teaser reveal">
         <p className="kicker">The name</p>
-        <h2>Why “Promax”?</h2>
+        <h2>Why “Gaerkaanooni”?</h2>
         <p>
-          In Indian courts, a matter is heard only as powerfully as it is presented. <em>Promax</em> is the promise we
-          make to every case we take: maximum preparation, maximum transparency, maximum persistence — until the
-          judgment is out.
+          <em>Gaerkaanooni</em> means unlawful. It is what the state does when it demolishes homes without notice,
+          detains people without cause, or answers protest with violence. We took the word for it and made it our
+          name — because our answer is the law itself: every case screened by lawyers, every rupee audited, every
+          matter followed to judgment. They act gaerkaanooni. We sue.
         </p>
         <a href="/" className="button">
           Explore the docket →
