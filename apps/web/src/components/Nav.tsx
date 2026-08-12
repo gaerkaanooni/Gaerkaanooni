@@ -31,10 +31,10 @@ export default function Nav({
     <nav>
       <span className="brand">
         <Link href="/" className="wordmark">
-          PIL Pro<em>max</em>
+          Gaer<em>kaanooni</em>
         </Link>
         <span className="devanagari" aria-hidden="true">
-          जनहित
+          ग़ैरक़ानूनी
         </span>
       </span>
       <Link href="/submit">Submit a case</Link>
