@@ -50,13 +50,16 @@ export const metadata: Metadata = {
     title: 'Gaerkaanooni — Fund the legal matters that need a hearing',
     description:
       "A fair hearing shouldn't depend on what you can afford. Legal matters funded by the public — every case screened by a lawyer, every rupee audited, every matter followed to its judgment.",
+    url: process.env.NEXT_PUBLIC_SITE_URL ?? undefined,
     siteName: 'Gaerkaanooni',
+    images: ['/opengraph-image.svg'],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Gaerkaanooni — Fund the legal matters that need a hearing',
     description:
       "A fair hearing shouldn't depend on what you can afford. Legal matters funded by the public.",
+    images: ['/opengraph-image.svg'],
   },
 }
 
