@@ -58,6 +58,16 @@ enum Category {
   ENVIRONMENT
   LABOR
   CONSUMER
+  HOUSING
+  FAMILY
+  DISABILITY
+  DISCRIMINATION
+  CRIMINAL_BAIL
+  DEBT_MONEY
+  HEALTH
+  EDUCATION
+  SOCIAL_SECURITY
+  LAND
   OTHER
 }
 
@@ -156,6 +166,7 @@ model Case {
   updates       CaseUpdate[]
   ledgerEntries LedgerEntry[]
   disbursements Disbursement[]
+  documents     CaseDocument[]
 
   @@index([stage])
   @@index([entryType])
@@ -284,4 +295,55 @@ model AuditLog {
   createdAt   DateTime @default(now())
 
   @@index([caseId, createdAt])
+}
+
+// A case document stored in Supabase Storage (private `case-docs` bucket).
+// The row is the metadata + object key; bytes live in Storage. The model is
+// carved with a unique storage path so re-uploading a file path is idempotent.
+model CaseDocument {
+  id           String   @id @default(cuid())
+  case         Case     @relation(fields: [caseId], references: [id], onDelete: Cascade)
+  caseId       String
+  storagePath  String   @unique
+  fileName     String
+  mimeType     String?
+  sizeBytes    Int?
+  uploadedById String?
+  createdAt    DateTime @default(now())
+
+  @@index([caseId])
+}
+
+// A referral — someone brought a legal matter to our attention on behalf of a
+// person who needs a fair hearing but may not have asked for help themselves.
+// Kept separate from `Case` because a referral has no goal/deadline yet; staff
+// promote it to a real case later. Fields are deliberately minimal and optional
+// so an onlooker can refer without exposing the person's identity.
+model Referral {
+  id                String   @id @default(cuid())
+  // The person who needs the hearing. A name or initials is enough — never a bare tag.
+  referredFor      String
+  category         Category?
+  matter           String
+  region           String?
+  // Contact for the person being referred — only if they are happy to be contacted.
+  contact          String?
+  // Who brought it forward (may choose to stay anonymous).
+  referrer         String?
+  referrerContact  String?
+  // True means the person consented to be contacted about their own matter.
+  contactConsented Boolean  @default(false)
+  status           ReferralStatus @default(NEW)
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  @@index([status])
+  @@index([createdAt])
+}
+
+enum ReferralStatus {
+  NEW
+  CONTACTED
+  ASSISTED
+  CLOSED
 }

@@ -24,27 +24,34 @@ export default async function Home() {
       <LandingBanner />
       <main>
         <section className="hero reveal">
-          <p className="kicker">Public Interest Litigation · docket № {String(campaigns.length).padStart(4, '0')}</p>
-        <h1>Gaerkaanooni</h1>
-        <p className="lede">
-          Public interest cases need money to make it to the courtroom. Pledge what you can afford — you are only
-          charged if the campaign reaches its goal, and if it does not, every backer is refunded in full.
-        </p>
-        <p className="explainer">
-          Courts are the last defence of the defenceless. We turn the public into the funder of public-interest
-          litigation: every case is screened by lawyers, funded by citizens, and followed to its judgment.
-        </p>
-        <div className="cta-row">
-          <a href="/login" className="button">
-            Sign in to support
-          </a>
-          <a href="/submit" className="button ghost">
-            Submit a case
-          </a>
-          <a href="#docket" className="button ghost">
-            Explore the docket
-          </a>
-        </div>
+          <p className="kicker">A fair hearing shouldn't depend on what you can afford</p>
+          <p className="kicker kicker-sub">Legal matters, funded by the public · docket № {String(campaigns.length).padStart(4, '0')}</p>
+          <h1>Gaerkaanooni</h1>
+          <p className="lede">
+            Going to court is hard enough when you have a lawyer behind you — harder still when you cannot afford one.
+            Pledge what you can to the matters that need a hearing. You are only charged if a case reaches its goal, and
+            if it does not, every backer is refunded in full.
+          </p>
+          <p className="explainer">
+            The cost of a good lawyer should decide who gets heard, it should not. We turn the public into a funder for
+            the legal matters people are up against — every case screened by a lawyer, funded by citizens, and followed
+            to its judgment. For the person themselves, a friend, a neighbour, a community — no one should lose their
+            day in court for want of funds.
+          </p>
+          <div className="cta-row">
+            <a href="/login" className="button">
+              Sign in to support
+            </a>
+            <a href="/submit" className="button ghost">
+              Submit a case
+            </a>
+            <a href="/refer" className="button ghost">
+              Refer someone who needs a hearing
+            </a>
+            <a href="#docket" className="button ghost">
+              Explore the docket
+            </a>
+          </div>
         <div className="rule" />
         <div className="stat-strip">
           <div className="stat">
@@ -81,8 +88,9 @@ export default async function Home() {
         <p className="kicker">The founding story</p>
         <h2>Why Gaerkaanooni exists</h2>
         <p>
-          Courts are the last defence of the defenceless — but good lawyering is expensive, and public interest cases
-          rarely have deep pockets. We are building a different kind of funder: the public, organised with rigour.
+          Courts are meant to be the last defence — but good lawyering is expensive, and too many people never get a
+          fair hearing simply because they cannot afford one. We are building a different kind of funder: the public,
+          organised with rigour, for the legal matters that need it most.
         </p>
         <a href="/about" className="button">
           Read the full story →

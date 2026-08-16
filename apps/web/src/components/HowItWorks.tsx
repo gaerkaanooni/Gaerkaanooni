@@ -53,8 +53,8 @@ export default function HowItWorks() {
         <span className="line" />
       </div>
       <p className="section-lede reveal">
-        Public interest litigation lets ordinary citizens ask the courts to enforce public rights — clean air, housing,
-        dignity. It is powerful and slow, and it needs money to move. Here is the process, in full.
+        Bringing a legal matter to court can change a life — but it needs money to move. We help good matters get a
+        hearing, whether they affect one person or a whole community. Here is the process, in full.
       </p>
 
       <ol className="process">

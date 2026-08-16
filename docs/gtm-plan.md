@@ -4,16 +4,21 @@ Status: draft · Stage: pre-PMF / early · Motion: community-led + founder-led �
 
 ## 0. Product snapshot
 
-Gaerkaanooni (ग़ैरक़ानूनी) turns the public into the funder of public-interest litigation. Lawyers
-screen every case, citizens fund it, and the platform follows it to judgment — with a registry
-number and an audited money trail the whole way.
+Gaerkaanooni (ग़ैरक़ानूनी) turns the public into the funder of the legal matters people are up
+against — whether a matter affects one person or a whole community. Lawyers screen every matter,
+citizens fund it, and the platform follows it to judgment — with a registry number and an audited
+money trail the whole way. The thesis: *a fair hearing shouldn't depend on what you can afford*.
 
-Two tracks:
+Two tracks, plus referrals:
 
-- **Campaign** — a court case is crowdfunded to a goal. Pledges are only charged if the goal is
+- **Campaign** — a legal matter is crowdfunded to a goal. Pledges are only charged if the goal is
   met; if not, every backer is refunded in full.
 - **Response fund** — a standing pool for urgent, same-day threats (evictions, demolitions,
   illegal detentions, custodial violence). 25% of any campaign surplus is swept into it.
+- **Referrals (/refer)** — an open, account-free intake so a friend, family member, neighbour or
+  community group can bring forward a matter for someone who needs a fair hearing but may not have
+  asked for help themselves. Dignity-first: never labels a person's circumstances, and contact is
+  only stored with consent.
 
 Trust mechanics are the product: lawyer screening, money-back guarantee, 5% platform fee (gateway
 carved out of it, never on top), full refunds, integer-paise audited ledger, stage tracking

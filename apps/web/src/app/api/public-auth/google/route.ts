@@ -1,16 +1,24 @@
 import { NextResponse } from 'next/server'
-import { signInWithGoogle, isSupabaseConfigured } from '@/lib/mock-supabase'
-import { createPublicSessionToken, PUBLIC_SESSION_COOKIE } from '@/lib/public-auth'
+import { signInWithGoogle } from '@/lib/public-auth'
 
-export async function POST() {
-  const user = signInWithGoogle()
-  const res = NextResponse.json({ ok: true, mock: !isSupabaseConfigured() })
-  res.cookies.set(PUBLIC_SESSION_COOKIE, createPublicSessionToken(user), {
-    httpOnly: true,
-    sameSite: 'lax',
-    secure: process.env.NODE_ENV === 'production',
-    path: '/',
-    maxAge: 30 * 24 * 60 * 60,
-  })
-  return res
+/**
+ * Start Google OAuth.
+ *
+ * Real mode: returns `{ url }` pointing at Supabase's Google authorization server;
+ * the client redirects there. Mock mode: completes instantly and returns
+ * `{ url: '', mock: true }` with a signed `pil_session` cookie set.
+ *
+ * The OAuth callback lives at `/api/public-auth/google/callback`.
+ */
+export async function POST(request: Request) {
+  const origin = request.headers.get('origin') ?? 'http://localhost:3000'
+  const redirectTo = new URL('/api/public-auth/google/callback', origin).toString()
+
+  try {
+    const result = await signInWithGoogle({ redirectTo })
+    return NextResponse.json(result)
+  } catch (err) {
+    const message = err instanceof Error ? err.message : 'Google sign-in failed'
+    return NextResponse.json({ error: message }, { status: 500 })
+  }
 }

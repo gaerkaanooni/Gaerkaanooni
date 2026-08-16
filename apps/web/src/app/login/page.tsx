@@ -7,7 +7,7 @@ export const metadata = {
 export default function LoginPage() {
   return (
     <main className="narrow">
-      <p className="detail-category reveal">Citizen access · phone OTP / Google</p>
+      <p className="detail-category reveal">Citizen access · email OTP / Google</p>
       <h1>Sign in</h1>
       <p className="lede">
         Signing in lets you back cases, follow matters, and submit new ones — it costs nothing until a case is

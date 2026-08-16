@@ -24,6 +24,9 @@ export default function CaseTable({ rows }: { rows: CaseListRow[] }) {
                 {formatRupees(row.raisedPaise)} of {formatRupees(row.goalAmountPaise)}
               </td>
               <td className="flags">
+                <a href={`/dashboard/cases/${row.id}`} className="flag">
+                  Documents
+                </a>
                 {row.overdueUpdate && <span className="flag">Update overdue</span>}
                 {row.staleStage && <span className="flag">Stale stage</span>}
                 {row.needsSignoff && <span className="flag flag-signoff">Needs sign-off</span>}

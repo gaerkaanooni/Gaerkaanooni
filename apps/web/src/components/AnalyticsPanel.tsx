@@ -1,4 +1,5 @@
 import type { Analytics } from '@pil/db'
+import { categoryLabel, isCategory } from '@pil/domain'
 import { formatRupees } from '@/lib/money'
 
 export default function AnalyticsPanel({ analytics }: { analytics: Analytics }) {
@@ -32,7 +33,7 @@ export default function AnalyticsPanel({ analytics }: { analytics: Analytics }) 
         <ul>
           {topCategories.map((c) => (
             <li key={c.category}>
-              {c.category}: {c.count}
+              {isCategory(c.category) ? categoryLabel(c.category) : c.category}: {c.count}
             </li>
           ))}
         </ul>

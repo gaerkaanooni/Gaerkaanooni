@@ -8,6 +8,21 @@ if (process.env.NODE_ENV !== 'production') globalForPrisma.prisma = prisma
 
 export { CaseRepository, type CreateSubmissionInput } from './repositories/case'
 export {
+  createReferral,
+  listReferrals,
+  updateReferralStatus,
+  type ReferralRow,
+  type CreateReferralInput,
+} from './repositories/referrals'
+export {
+  createDocument,
+  listDocuments,
+  getDocument,
+  deleteDocument,
+  type CaseDocumentRow,
+  type CreateDocumentInput,
+} from './repositories/documents'
+export {
   publishCampaign,
   screenCase,
   submitCampaign,

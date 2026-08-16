@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f3ecdc"/>
+      <stop offset="1" stop-color="#e9dfc7"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="#b3201c" fill-opacity="0.05"/>
+
+  <!-- Docket-rule motif -->
+  <line x1="84" y1="470" x2="1116" y2="470" stroke="#211b10" stroke-opacity="0.18" stroke-width="4" stroke-dasharray="2 22"/>
+
+  <!-- The Tilted Balance (large) -->
+  <g transform="translate(96,180)" stroke="#b3201c" fill="none" stroke-linecap="round">
+    <line x1="40" y1="16" x2="200" y2="72" stroke-width="14"/>
+    <line x1="40" y1="16" x2="40" y2="44" stroke-width="9"/>
+    <line x1="200" y1="72" x2="200" y2="104" stroke-width="9"/>
+    <path d="M12 52 q 28 40 56 0" stroke-width="11"/>
+    <path d="M172 118 q 28 40 56 0" stroke-width="11"/>
+    <line x1="120" y1="4" x2="120" y2="210" stroke-width="10"/>
+    <path d="M96 236 h48 l-10 -16 h-28 z" fill="#b3201c" fill-opacity="0.9" stroke="none"/>
+  </g>
+
+  <text x="360" y="300" font-family="Georgia, 'Times New Roman', serif" font-size="96" font-weight="700" fill="#211b10">Gaer<text y="300" fill="#b3201c">kaanooni</text></text>
+
+  <text x="360" y="372" font-family="Georgia, serif" font-size="34" fill="#6d6246">They act gaerkaanooni. We sue.</text>
+
+  <text x="360" y="430" font-family="'Courier New', monospace" font-size="24" fill="#0c5c3a" letter-spacing="4">PUBLIC INTEREST LITIGATION · FUNDED BY CITIZENS</text>
+</svg>

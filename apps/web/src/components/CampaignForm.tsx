@@ -1,8 +1,9 @@
 'use client'
 
 import { useState } from 'react'
+import { VALID_CATEGORIES, categoryLabel, type CategoryName } from '@pil/domain'
 
-const CATEGORIES = ['CIVIL_LIBERTIES', 'ENVIRONMENT', 'LABOR', 'CONSUMER', 'OTHER']
+const CATEGORIES = VALID_CATEGORIES
 
 export default function CampaignForm() {
   const [form, setForm] = useState({
@@ -94,7 +95,7 @@ export default function CampaignForm() {
       <select id="category" value={form.category} onChange={(e) => set('category', e.target.value)}>
         {CATEGORIES.map((c) => (
           <option key={c} value={c}>
-            {c.replace('_', ' ')}
+            {categoryLabel(c as CategoryName)}
           </option>
         ))}
       </select>

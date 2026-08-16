@@ -31,8 +31,33 @@ const devanagari = Tiro_Devanagari_Hindi({
 })
 
 export const metadata: Metadata = {
-  title: 'Gaerkaanooni',
-  description: "Back public interest litigation with real commitment. Change.org's reach, Kickstarter's commitment.",
+  metadataBase: process.env.NEXT_PUBLIC_SITE_URL
+    ? new URL(process.env.NEXT_PUBLIC_SITE_URL)
+    : undefined,
+  title: {
+    default: 'Gaerkaanooni',
+    template: '%s — Gaerkaanooni',
+  },
+  description:
+    "A fair hearing shouldn't depend on what you can afford. Legal matters funded by the public — every case screened by a lawyer, every rupee audited, every matter followed to its judgment.",
+  applicationName: 'Gaerkaanooni',
+  icons: {
+    icon: '/icon.svg',
+    apple: '/apple-icon.svg',
+  },
+  openGraph: {
+    type: 'website',
+    title: 'Gaerkaanooni — Fund the legal matters that need a hearing',
+    description:
+      "A fair hearing shouldn't depend on what you can afford. Legal matters funded by the public — every case screened by a lawyer, every rupee audited, every matter followed to its judgment.",
+    siteName: 'Gaerkaanooni',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Gaerkaanooni — Fund the legal matters that need a hearing',
+    description:
+      "A fair hearing shouldn't depend on what you can afford. Legal matters funded by the public.",
+  },
 }
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {

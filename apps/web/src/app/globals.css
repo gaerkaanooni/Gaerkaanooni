@@ -129,6 +129,9 @@ nav .brand {
 }
 
 nav .brand .wordmark {
+  display: flex;
+  align-items: center;
+  gap: 8px;
   font-family: var(--font-display);
   font-size: 22px;
   font-weight: 900;
@@ -1276,4 +1279,82 @@ main.narrow .lede {
     transform: none;
     margin-bottom: 14px;
   }
+}
+
+/* ------------------------------------------------------------------ */
+/* Admin dashboard KPI strip                                           */
+/* ------------------------------------------------------------------ */
+.kpis {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 14px;
+  margin: 18px 0 28px;
+}
+.kpi {
+  background: var(--surface, #fff);
+  border: 1px solid var(--border, #e4e1d8);
+  border-radius: 10px;
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.kpi-label {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--muted, #6b675c);
+}
+.kpi-value {
+  font-size: 1.35rem;
+  line-height: 1.15;
+}
+
+/* ------------------------------------------------------------------ */
+/* Case documents (staff)                                              */
+/* ------------------------------------------------------------------ */
+.docs-empty {
+  color: var(--muted, #6b675c);
+  font-style: italic;
+}
+.doc-upload {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 14px;
+}
+.doc-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.doc-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 14px;
+  border: 1px solid var(--border, #e4e1d8);
+  border-radius: 8px;
+}
+.doc-meta small {
+  display: block;
+  color: var(--muted, #6b675c);
+}
+
+/* Referral intake fieldset */
+.gate-fieldset {
+  border: 1px solid var(--line-strong, #211b1033);
+  border-radius: 8px;
+  padding: 14px 16px;
+  margin: 18px 0;
+}
+.gate-fieldset legend {
+  font-family: var(--font-display, var(--font-body));
+  font-weight: 600;
+  padding: 0 6px;
 }

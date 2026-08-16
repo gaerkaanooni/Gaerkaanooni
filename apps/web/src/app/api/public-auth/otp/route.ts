@@ -1,19 +1,19 @@
 import { NextResponse } from 'next/server'
-import { requestPhoneOtp } from '@/lib/mock-supabase'
+import { requestOtp } from '@/lib/public-auth'
 
-const PHONE_RE = /^\+?\d{7,15}$/
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
 export async function POST(request: Request) {
-  let phone = ''
+  let email = ''
   try {
-    const body = (await request.json()) as { phone?: string }
-    phone = String(body.phone ?? '').trim()
+    const body = (await request.json()) as { email?: string }
+    email = String(body.email ?? '').trim().toLowerCase()
   } catch {
     return NextResponse.json({ error: 'Invalid request' }, { status: 400 })
   }
-  if (!PHONE_RE.test(phone)) {
-    return NextResponse.json({ error: 'Enter a valid phone number' }, { status: 400 })
+  if (!EMAIL_RE.test(email)) {
+    return NextResponse.json({ error: 'Enter a valid email address' }, { status: 400 })
   }
-  const result = requestPhoneOtp(phone)
+  const result = await requestOtp(email)
   return NextResponse.json(result)
 }

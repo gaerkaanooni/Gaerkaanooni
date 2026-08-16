@@ -3,12 +3,12 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 
-type Step = 'phone' | 'code'
+type Step = 'email' | 'code'
 
 export default function LoginGate() {
   const router = useRouter()
-  const [step, setStep] = useState<Step>('phone')
-  const [phone, setPhone] = useState('')
+  const [step, setStep] = useState<Step>('email')
+  const [email, setEmail] = useState('')
   const [code, setCode] = useState('')
   const [devCode, setDevCode] = useState<string | null>(null)
   const [error, setError] = useState('')
@@ -22,7 +22,7 @@ export default function LoginGate() {
       const res = await fetch('/api/public-auth/otp', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ phone }),
+        body: JSON.stringify({ email }),
       })
       const body = await res.json()
       if (!res.ok) throw new Error(body.error ?? 'Could not send the code')
@@ -43,7 +43,7 @@ export default function LoginGate() {
       const res = await fetch('/api/public-auth/otp/verify', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ phone, code }),
+        body: JSON.stringify({ email, code }),
       })
       const body = await res.json()
       if (!res.ok) throw new Error(body.error ?? 'Invalid code')
@@ -63,6 +63,12 @@ export default function LoginGate() {
       const res = await fetch('/api/public-auth/google', { method: 'POST' })
       const body = await res.json()
       if (!res.ok) throw new Error(body.error ?? 'Google sign-in failed')
+      if (typeof body.url === 'string' && body.url) {
+        // Real Supabase OAuth — browser navigates to Google's consent screen.
+        window.location.href = body.url
+        return
+      }
+      // Mock mode completes instantly.
       router.push('/')
       router.refresh()
     } catch (err) {
@@ -74,16 +80,17 @@ export default function LoginGate() {
 
   return (
     <div className="gate">
-      {step === 'phone' ? (
+      {step === 'email' ? (
         <form onSubmit={sendOtp} className="gate-form">
-          <label htmlFor="gate-phone">Phone number</label>
+          <label htmlFor="gate-email">Email address</label>
           <input
-            id="gate-phone"
-            type="tel"
-            inputMode="tel"
-            placeholder="+91 98765 43210"
-            value={phone}
-            onChange={(e) => setPhone(e.target.value)}
+            id="gate-email"
+            type="email"
+            autoComplete="email"
+            inputMode="email"
+            placeholder="you@example.com"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             required
           />
           {error && (
@@ -98,9 +105,9 @@ export default function LoginGate() {
       ) : (
         <form onSubmit={verify} className="gate-form">
           <p className="gate-note">
-            Code sent to <strong>{phone}</strong>.{' '}
-            <button type="button" className="link" onClick={() => setStep('phone')}>
-              Change number
+            Code sent to <strong>{email}</strong>.{' '}
+            <button type="button" className="link" onClick={() => setStep('email')}>
+              Change email
             </button>
           </p>
           {devCode && (

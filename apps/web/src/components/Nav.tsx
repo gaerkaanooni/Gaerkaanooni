@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { signOut } from 'next-auth/react'
+import Logo from '@/components/Logo'
 
 export default function Nav({
   signedIn,
@@ -31,13 +32,17 @@ export default function Nav({
     <nav>
       <span className="brand">
         <Link href="/" className="wordmark">
-          Gaer<em>kaanooni</em>
+          <Logo size={26} tone="seal" />
+          <span>
+            Gaer<em>kaanooni</em>
+          </span>
         </Link>
         <span className="devanagari" aria-hidden="true">
           ग़ैरक़ानूनी
         </span>
       </span>
       <Link href="/submit">Submit a case</Link>
+      <Link href="/refer">Refer someone</Link>
       <Link href="/response">Urgent intake</Link>
       <Link href="/about">About</Link>
       {signedIn ? (

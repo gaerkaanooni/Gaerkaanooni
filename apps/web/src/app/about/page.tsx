@@ -6,7 +6,7 @@ const PRINCIPLES = [
   {
     no: '01',
     title: 'Eligibility before money',
-    body: 'Nothing is funded without a lawyer on record confirming it is a genuine matter of public interest. Screening is real and documented; every decision is logged.',
+    body: 'Nothing is funded without a lawyer on record confirming it is a genuine legal matter worth a hearing — whether it affects one person or many. Screening is real and documented; every decision is logged.',
   },
   {
     no: '02',
@@ -42,8 +42,9 @@ export default function AboutPage() {
         <p className="kicker">Who we are · what we do</p>
         <h1>About Gaerkaanooni</h1>
         <p className="lede">
-          Courts are the last defence of the defenceless. We exist to make sure good public interest cases — and the
-          people who bring them — are never stopped by the cost of a good lawyer.
+          A fair hearing should not depend on what you can afford. We exist to make sure the legal matters people are
+          up against — their own, or those brought forward for a friend, a neighbour, a community — are never stopped
+          by the cost of a good lawyer.
         </p>
         <div className="rule" />
         <div className="stat-strip">
@@ -68,23 +69,27 @@ export default function AboutPage() {
 
       <div className="section-head reveal d1">
         <span className="no">§ I</span>
-        <h2>What is a PIL?</h2>
+        <h2>What kind of matters do we fund?</h2>
         <span className="line" />
       </div>
 
       <div className="prose reveal">
         <p>
-          Public interest litigation, or PIL, is the route by which ordinary citizens ask the courts to enforce rights
-          that affect the public at large — the right to clean air and water, to shelter, to dignity, to be free of
-          arbitrary state action. Under Article 32 of the Constitution, any person can move the Supreme Court directly;
-          under Article 226, the High Courts can issue writs. The standing requirement is relaxed precisely so that
-          public wrongs do not go unchallenged for want of a formally aggrieved party.
+          Some matters affect many people at once — the pollution of a river, a demolition without notice, a right
+          choked for a whole community. Under Article 32 of the Constitution, any person can move the Supreme Court
+          directly, and under Article 226, the High Courts can issue writs. This is often called public-interest
+          litigation, and it is one of the most powerful instruments an Indian citizen holds.
         </p>
         <p>
-          It is one of the most powerful instruments an Indian citizen holds. It is also slow, technical, and expensive.
-          Drafting a sound petition, engaging counsel, marshalling expert evidence, paying court fees, and sustaining a
-          matter through years of hearings — none of this is cheap, and public interest cases rarely have a commercial
-          sponsor.
+          But it is not the only kind of matter that needs help. A fair hearing matters just as much for one person —
+          a tenancy threatened, a dismissal without wages, a child denied a place in school, a loved one held without
+          cause, a disability that a workplace refuses to accommodate. The law should not be a door that only opens for
+          those who can afford to reach it.
+        </p>
+        <p>
+          Whether the matter affects one person or a village, the blocker is often the same: the cost of good lawyering.
+          Drafting a sound petition, engaging counsel, marshalling evidence, paying court fees, and sustaining a matter
+          through hearings — none of it is cheap, and someone who cannot afford it rarely has a commercial sponsor.
         </p>
         <p>
           That is the gap we were built for.

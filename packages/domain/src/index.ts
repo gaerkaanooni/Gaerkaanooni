@@ -31,5 +31,5 @@ export {
 } from './update-cadence'
 export { canAssign, isOverCapacity, logHours, type VolunteerAvailability, type VolunteerRole } from './volunteers'
 export { createAuditEntry, requiresSignOff, type AuditEntry } from './audit'
-export { isCategory, VALID_CATEGORIES, type CategoryName } from './categories'
+export { isCategory, categoryLabel, VALID_CATEGORIES, CATEGORY_LABELS, type CategoryName } from './categories'
 export { assertRole, canPerform, STAFF_ROLES, type Action, type Role } from './roles'

@@ -27,7 +27,7 @@ describe('LoginGate', () => {
     )
 
     render(<LoginGate />)
-    await userEvent.type(screen.getByLabelText(/phone number/i), '+919876543210')
+    await userEvent.type(screen.getByLabelText(/email address/i), 'citizen@example.com')
     await userEvent.click(screen.getByRole('button', { name: /send me a code/i }))
 
     expect(await screen.findByText(/your code is/i)).toBeInTheDocument()
@@ -50,7 +50,7 @@ describe('LoginGate', () => {
     )
 
     render(<LoginGate />)
-    await userEvent.type(screen.getByLabelText(/phone number/i), '+919876543210')
+    await userEvent.type(screen.getByLabelText(/email address/i), 'citizen@example.com')
     await userEvent.click(screen.getByRole('button', { name: /send me a code/i }))
     await userEvent.type(screen.getByLabelText(/6-digit code/i), '000000')
     await userEvent.click(screen.getByRole('button', { name: /^sign in$/i }))
