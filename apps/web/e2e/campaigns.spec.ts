@@ -22,9 +22,9 @@ async function loginAsStaff(page: Page) {
   await expect(page.getByText(/sign out/i)).toBeVisible()
 }
 
-async function loginAsPublic(page: Page, phone: string) {
+async function loginAsPublic(page: Page, email: string) {
   await page.goto('/login')
-  await page.getByLabel(/phone number/i).fill(phone)
+  await page.getByLabel(/email address/i).fill(email)
   await page.getByRole('button', { name: /send me a code/i }).click()
   const devCode = await page.getByText(/your code is/i).locator('strong').textContent()
   await page.getByLabel(/6-digit code/i).fill(devCode ?? '')
@@ -154,7 +154,7 @@ test('the operations dashboard is visible to staff', async ({ page }) => {
 })
 
 test('a newly registered public user is kept out of the dashboard', async ({ page }) => {
-  await loginAsPublic(page, `+9199${String(Date.now()).slice(-8)}`)
+  await loginAsPublic(page, `e2e-${Date.now()}@example.com`)
 
   await page.goto('/dashboard')
   await expect(page.getByRole('heading', { level: 1 })).toHaveText('Sign in')
