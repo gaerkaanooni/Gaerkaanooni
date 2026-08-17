@@ -1,7 +1,7 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "buildCommand": "npm run db:generate --workspace @pil/db && npm run build",
-  "outputDirectory": ".next",
+  "outputDirectory": "apps/web/.next",
   "framework": "nextjs",
   "git": {
     "deploymentEnabled": {
