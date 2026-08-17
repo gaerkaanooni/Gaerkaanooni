@@ -5,7 +5,7 @@ This repository uses [DeepSeek Harness (`dsh`)](https://github.com/deepseek-ai/d
 ## Repository Layout
 
 ```
-PIL-promax/
+Gaerkaanooni/
 ├── apps/              # Frontend & Web Applications (@pil/web)
 ├── packages/          # Shared packages (e.g. Prisma database schemas, utilities)
 ├── docs/              # Strategy, product planning, and technical documentation

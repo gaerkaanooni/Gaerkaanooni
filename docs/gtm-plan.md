@@ -199,9 +199,8 @@ judgment.
   English descriptor to every surface.
 - **Launch scope** — one flagship case vs. three-in-parallel. (Recommended: three, one per theme.)
 - **Budget** — plan assumes ₹0–₹2k/mo; paid retargeting is optional and later.
-- **Product rename** — the app's visible copy (hero h1 "PIL Promax", about page, meta, e2e test
-  asserting "PIL Promax") still says the old name. Decided but not done: rename user-facing copy
-  to Gaerkaanooni (keep internal package names `@pil/*`, DB `pil_promax`).
+- **Product rename** — user-facing copy is now fully renamed to Gaerkaanooni (hero, about page,
+  meta, seed emails). Internal identifiers keep `@pil/*` workspace names and DB `pil_promax`.
 - **India-only** — INR + Hindi typography already signal it; don't expand geography pre-PMF.
 
 ## 10. Risks

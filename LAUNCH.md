@@ -1,6 +1,6 @@
 # Gaerkaanooni — Launch Runbook
 
-Launch-ready baseline for PIL-promax (brand **Gaerkaanooni**): a platform to fund the legal matters people
+Launch-ready baseline for **Gaerkaanooni**: a platform to fund the legal matters people
 are up against — a fair hearing shouldn't depend on what you can afford. This runbook takes an
 already-green codebase to a live production deployment.
 
@@ -127,7 +127,7 @@ environment variables (marking the non-`NEXT_PUBLIC_` ones as secret).
 ## 6. Vercel deployment
 
 1. Push `main` to GitHub (the repo has an upstream remote at
-   `https://github.com/Anmoldureha/PIL-promax`).
+   `https://github.com/gaerkaanooni/Gaerkaanooni`).
 2. [vercel.com](https://vercel.com) → New Project → import the GitHub repo.
 3. **Root directory:** `/` (the `vercel.json` in the repo pins build command
    `npm run build` and output `.next` for the monorepo).

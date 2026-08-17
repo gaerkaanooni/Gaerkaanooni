@@ -44,10 +44,10 @@ async function createUsers() {
     if (user.role !== role) await setRole(db, { userId: user.id, role, actorId: 'seed' })
     return user
   }
-  const admin = await upsert('admin@pilpromax.org', 'Aarti Deshmukh', 'ADMIN')
-  const lawyer = await upsert('lawyer@pilpromax.org', 'Rohan Mehta', 'LAWYER')
-  const intern = await upsert('intern@pilpromax.org', 'Nisha Iyer', 'INTERN')
-  const verifier = await upsert('verifier@pilpromax.org', 'Kavya Nair', 'LAWYER')
+  const admin = await upsert('admin@gaerkaanooni.org', 'Aarti Deshmukh', 'ADMIN')
+  const lawyer = await upsert('lawyer@gaerkaanooni.org', 'Rohan Mehta', 'LAWYER')
+  const intern = await upsert('intern@gaerkaanooni.org', 'Nisha Iyer', 'INTERN')
+  const verifier = await upsert('verifier@gaerkaanooni.org', 'Kavya Nair', 'LAWYER')
   const backer = await upsert('backer@example.com', 'Sanjay Kumar', 'BACKER')
 
   const mkVol = async (userId: string, role: 'LAWYER' | 'VERIFIER' | 'CASE_MANAGER', capacityLimit: number, skills: string[]) => {
@@ -234,7 +234,7 @@ The amount sought per commuter is small; the principle is large. Funding covers 
     applicantName: 'Varun Reddy',
     contact: 'varun@example.com',
   })
-  await screenCase(db, { caseId: approved.id, decidedBy: 'lawyer@pilpromax.org', isEligible: true, reason: 'Consumer grievance affecting many, suitable for a group remedy.' })
+  await screenCase(db, { caseId: approved.id, decidedBy: 'lawyer@gaerkaanooni.org', isEligible: true, reason: 'Consumer grievance affecting many, suitable for a group remedy.' })
   return { pending, approved }
 }
 
@@ -319,12 +319,12 @@ async function main() {
   await seedFundedShelter(users)
   await seedPipeline()
   await seedResponseTrack(users)
-  console.log('Seeded PIL Promax dev database.')
+  console.log('Seeded Gaerkaanooni dev database.')
   console.log('Sign-ins (password for all: seed-pass-123):')
-  console.log('  admin@pilpromax.org  (ADMIN)')
-  console.log('  lawyer@pilpromax.org (LAWYER)')
-  console.log('  intern@pilpromax.org (INTERN)')
-  console.log('  verifier@pilpromax.org (LAWYER/verifier)')
+  console.log('  admin@gaerkaanooni.org  (ADMIN)')
+  console.log('  lawyer@gaerkaanooni.org (LAWYER)')
+  console.log('  intern@gaerkaanooni.org (INTERN)')
+  console.log('  verifier@gaerkaanooni.org (LAWYER/verifier)')
   console.log('  backer@example.com   (BACKER)')
 }
 

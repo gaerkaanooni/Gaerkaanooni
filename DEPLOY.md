@@ -9,7 +9,7 @@ Only **source code** goes to GitHub/Vercel. Secrets never live in the repo — t
 injected at build/runtime. `vercel.json` at the repo root already pins the monorepo
 build (`npm run build`, output `.next`). So:
 
-- Push the whole repo to `main` (`origin` = `https://github.com/Anmoldureha/PIL-promax`).
+- Push the whole repo to `main` (`origin` = `https://github.com/gaerkaanooni/Gaerkaanooni`).
 - Vercel imports that repo, root directory `/`, Framework Preset **Next.js**.
 - Vercel's build runs `npm run build` → then Next serves the routes. New routes you'll
   notice live: `/api/cases/[id]/documents`, `/api/public-auth/google/callback`,
