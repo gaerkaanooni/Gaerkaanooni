@@ -153,6 +153,12 @@ nav .brand .devanagari {
   color: var(--marigold);
 }
 
+nav .links {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+}
+
 nav .signout {
   border: 1px solid var(--line-strong);
   padding: 6px 12px;
@@ -1265,19 +1271,156 @@ main.narrow .lede {
   }
 }
 
+@media (max-width: 768px) {
+  main {
+    padding: 30px 18px 72px;
+  }
+  .hero {
+    padding: 38px 0 28px;
+    margin-bottom: 30px;
+  }
+  .process li {
+    grid-template-columns: 46px 1fr;
+    gap: 4px 12px;
+    padding: 18px 16px;
+  }
+  .process li::before {
+    left: 23px;
+  }
+  .process .step-no {
+    font-size: 11px;
+    padding: 6px 8px;
+  }
+}
+
 @media (max-width: 640px) {
   nav {
     flex-wrap: wrap;
-    gap: 8px 16px;
+    gap: 8px 0;
+    padding: 10px 14px;
   }
   nav .brand {
     width: 100%;
+    margin-right: 0;
+  }
+  nav .links {
+    width: 100%;
+    margin-left: 0;
+    gap: 18px;
+    overflow-x: auto;
+    padding-bottom: 2px;
+    scrollbar-width: none;
+  }
+  nav .links::-webkit-scrollbar {
+    display: none;
+  }
+  nav .links a,
+  nav .links button {
+    white-space: nowrap;
+    padding: 8px 0;
+  }
+  nav .links .signout {
+    padding: 8px 12px;
+    border-color: var(--line-strong);
+    border: 1px solid var(--line-strong);
   }
   .detail-file .stamp {
     position: static;
     display: inline-block;
     transform: none;
     margin-bottom: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    font-size: 16px;
+  }
+  main {
+    padding: 22px 14px 60px;
+  }
+  h1 {
+    font-size: clamp(1.75rem, 9vw, 2.4rem);
+  }
+  .hero {
+    padding: 30px 0 22px;
+  }
+  .kicker {
+    font-size: 11px;
+    letter-spacing: 0.14em;
+  }
+  .stat-strip {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .stat-strip .stat {
+    padding: 12px 14px;
+    border-bottom: 1px solid var(--line);
+    border-right: 1px solid var(--line);
+  }
+  .stat-strip .stat:nth-child(even) {
+    border-right: 0;
+  }
+  .stat-strip .stat:nth-last-child(-n + 2) {
+    border-bottom: 0;
+  }
+  .stat-strip .stat .n {
+    font-size: 1.4rem;
+  }
+  .cta-row .button {
+    width: 100%;
+    text-align: center;
+  }
+  .campaign-card {
+    padding: 16px 16px 14px;
+  }
+  .campaign-card h2 {
+    font-size: 1.22rem;
+  }
+  .campaign-card .case-no {
+    flex-wrap: wrap;
+    gap: 4px 8px;
+  }
+  .funding-figures {
+    flex-wrap: wrap;
+    gap: 2px 10px;
+  }
+  .section-head {
+    margin: 36px 0 4px;
+  }
+  .detail-file {
+    padding: 22px 18px 18px;
+  }
+  .detail-category {
+    font-size: 11px;
+    letter-spacing: 0.12em;
+  }
+  .detail-supporters {
+    font-size: 11px;
+  }
+  form,
+  .gate-form,
+  .checkout {
+    padding: 18px 14px;
+  }
+  .methods {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+  .table-wrap th,
+  .table-wrap td {
+    padding: 10px 10px;
+  }
+  button,
+  .button {
+    min-height: 44px;
+    padding: 12px 16px;
+  }
+  .about-teaser {
+    padding: 22px 18px;
+    box-shadow: 5px 5px 0 0 var(--marigold);
+  }
+  .banner {
+    font-size: 11px;
   }
 }
 

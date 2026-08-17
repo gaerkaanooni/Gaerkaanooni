@@ -41,21 +41,23 @@ export default function Nav({
           ग़ैरक़ानूनी
         </span>
       </span>
-      <Link href="/submit">Submit a case</Link>
-      <Link href="/refer">Refer someone</Link>
-      <Link href="/response">Urgent intake</Link>
-      <Link href="/about">About</Link>
-      {signedIn ? (
-        <>
-          {isStaff && <Link href="/dashboard">Dashboard</Link>}
-          {isAdmin && <Link href="/analytics">Analytics</Link>}
-          <button className="signout" onClick={handleSignOut}>
-            Sign out
-          </button>
-        </>
-      ) : (
-        <Link href="/login">Sign in</Link>
-      )}
+      <span className="links">
+        <Link href="/submit">Submit a case</Link>
+        <Link href="/refer">Refer someone</Link>
+        <Link href="/response">Urgent intake</Link>
+        <Link href="/about">About</Link>
+        {signedIn ? (
+          <>
+            {isStaff && <Link href="/dashboard">Dashboard</Link>}
+            {isAdmin && <Link href="/analytics">Analytics</Link>}
+            <button className="signout" onClick={handleSignOut}>
+              Sign out
+            </button>
+          </>
+        ) : (
+          <Link href="/login">Sign in</Link>
+        )}
+      </span>
     </nav>
   )
 }
