@@ -156,12 +156,60 @@ nav .brand .devanagari {
 nav .links {
   display: flex;
   align-items: center;
-  gap: 22px;
+  gap: 0;
+}
+
+nav .links a + a::before,
+nav .links a + button::before {
+  content: "·";
+  color: var(--marigold);
+  font-size: 14px;
+  line-height: 1;
+  margin-right: 22px;
+}
+
+nav .links a,
+nav .links button {
+  margin-left: 22px;
 }
 
 nav .signout {
   border: 1px solid var(--line-strong);
   padding: 6px 12px;
+}
+
+.nav-toggle {
+  display: none;
+  margin-left: auto;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 42px;
+  height: 42px;
+  padding: 10px;
+  border: 1px solid var(--line-strong);
+  background: transparent;
+  cursor: pointer;
+}
+
+.nav-toggle .bar {
+  display: block;
+  height: 2px;
+  width: 100%;
+  background: var(--ink);
+  transition: transform 0.18s ease, opacity 0.18s ease;
+}
+
+.nav-toggle.open .bar:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.nav-toggle.open .bar:nth-child(2) {
+  opacity: 0;
+}
+
+.nav-toggle.open .bar:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
 }
 
 /* ---------- Hero / masthead block ---------- */
@@ -1295,34 +1343,49 @@ main.narrow .lede {
 
 @media (max-width: 640px) {
   nav {
+    display: flex;
     flex-wrap: wrap;
-    gap: 8px 0;
+    align-items: center;
+    gap: 10px 14px;
     padding: 10px 14px;
   }
   nav .brand {
-    width: 100%;
-    margin-right: 0;
+    width: auto;
+    margin-right: auto;
+  }
+  nav .nav-toggle {
+    display: flex;
   }
   nav .links {
-    width: 100%;
-    margin-left: 0;
-    gap: 18px;
-    overflow-x: auto;
-    padding-bottom: 2px;
-    scrollbar-width: none;
-  }
-  nav .links::-webkit-scrollbar {
     display: none;
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    margin-left: 0;
+    padding: 8px 0 4px;
+    border-top: 1px solid var(--line);
+  }
+  nav .links.open {
+    display: flex;
+  }
+  nav .links a + a::before,
+  nav .links a + button::before {
+    content: none;
+    margin-right: 0;
   }
   nav .links a,
   nav .links button {
-    white-space: nowrap;
-    padding: 8px 0;
+    margin-left: 0;
+    white-space: normal;
+    padding: 14px 2px;
+    font-size: 12px;
+    text-align: left;
   }
   nav .links .signout {
-    padding: 8px 12px;
-    border-color: var(--line-strong);
-    border: 1px solid var(--line-strong);
+    margin-top: 4px;
+    padding: 12px;
+    text-align: center;
   }
   .detail-file .stamp {
     position: static;

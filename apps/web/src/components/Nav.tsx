@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
+import { useState } from 'react'
 import { signOut } from 'next-auth/react'
 import Logo from '@/components/Logo'
 
@@ -17,6 +18,7 @@ export default function Nav({
   kind?: 'staff' | 'public' | null
 }) {
   const router = useRouter()
+  const [open, setOpen] = useState(false)
 
   async function handleSignOut() {
     if (kind === 'staff') {
@@ -41,7 +43,24 @@ export default function Nav({
           ग़ैरक़ानूनी
         </span>
       </span>
-      <span className="links">
+      <button
+        type="button"
+        className={`nav-toggle${open ? ' open' : ''}`}
+        aria-expanded={open}
+        aria-label={open ? 'Close menu' : 'Open menu'}
+        onClick={() => setOpen((v) => !v)}
+      >
+        <span className="bar" />
+        <span className="bar" />
+        <span className="bar" />
+      </button>
+      <span
+        className={`links${open ? ' open' : ''}`}
+        onClick={(e) => {
+          const t = e.target as HTMLElement
+          if (t.closest('a') || t.closest('button')) setOpen(false)
+        }}
+      >
         <Link href="/submit">Submit a case</Link>
         <Link href="/refer">Refer someone</Link>
         <Link href="/response">Urgent intake</Link>
