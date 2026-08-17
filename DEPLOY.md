@@ -39,7 +39,7 @@ To run the real stack, mirror all production keys into Vercel (below).
 | `NEXT_PUBLIC_SUPABASE_ANON_KEY` | yes | Supabase → Settings → API → **anon / public** key | ✅ for real auth |
 | `SUPABASE_SERVICE_ROLE_KEY` | no | Supabase → Settings → API → **service_role** key | ✅ for doc upload |
 | `SUPABASE_STORAGE_BUCKET` | no | your bucket name, default `case-docs` | ✅ for doc upload |
-| `NEXT_PUBLIC_SITE_URL` | no | your production URL, e.g. `https://gaerkaanooni.vercel.app` (also set `AUTH_URL`/`NEXTAUTH_URL` = same) | ✅ for social/OG + Auth.js |
+| `NEXT_PUBLIC_SITE_URL` | no | your production URL — live site is `https://gaerkaanooni.vercel.app` (also set `AUTH_URL`/`NEXTAUTH_URL` = same) | ✅ for social/OG + Auth.js |
 | `RAZORPAY_KEY_ID` + `RAZORPAY_KEY_SECRET` | no | Razorpay dashboard | only when payments go live |
 
 Mark every **non-`NEXT_PUBLIC_`** variable as **secret** in Vercel and add them for
