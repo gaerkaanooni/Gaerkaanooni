@@ -24,29 +24,26 @@ export default async function Home() {
       <LandingBanner />
       <main>
         <section className="hero reveal">
-          <p className="kicker">A fair hearing shouldn't depend on what you can afford</p>
-          <p className="kicker kicker-sub">Legal matters, funded by the public · docket № {String(campaigns.length).padStart(4, '0')}</p>
+          <p className="kicker">Legal matters, funded by the public</p>
+          <p className="kicker kicker-sub">
+            Screened by lawyers · only charged if the goal is met · refunded if it isn't · docket №{' '}
+            {String(campaigns.length).padStart(4, '0')}
+          </p>
           <h1>Gaerkaanooni</h1>
           <p className="lede">
-            Going to court is hard enough when you have a lawyer behind you — harder still when you cannot afford one.
-            Pledge what you can to the matters that need a hearing. You are only charged if a case reaches its goal, and
-            if it does not, every backer is refunded in full.
-          </p>
-          <p className="explainer">
-            The cost of a good lawyer should decide who gets heard, it should not. We turn the public into a funder for
-            the legal matters people are up against — every case screened by a lawyer, funded by citizens, and followed
-            to its judgment. For the person themselves, a friend, a neighbour, a community — no one should lose their
-            day in court for want of funds.
+            Going to court is expensive — and the cost of a lawyer decides who gets heard. Pledge what you can to a
+            case you believe in. You are only charged if it reaches its goal; if it doesn't, every backer is refunded
+            in full.
           </p>
           <div className="cta-row">
             <a href="/login" className="button">
-              Sign in to support
+              Support a case
             </a>
             <a href="/submit" className="button ghost">
               Submit a case
             </a>
             <a href="/refer" className="button ghost">
-              Refer someone who needs a hearing
+              Refer someone
             </a>
             <a href="#docket" className="button ghost">
               Explore the docket
