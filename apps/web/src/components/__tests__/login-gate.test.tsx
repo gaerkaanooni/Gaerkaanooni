@@ -69,4 +69,63 @@ describe('LoginGate', () => {
 
     await waitFor(() => expect(pushMock).toHaveBeenCalledWith('/'))
   })
+
+  it('redirects to the Google consent screen when an OAuth url is returned', async () => {
+    vi.stubGlobal(
+      'fetch',
+      vi.fn().mockResolvedValue(
+        new Response(JSON.stringify({ ok: true, url: 'https://accounts.google.com/o/oauth2/auth?x=1' }), { status: 200 }),
+      ),
+    )
+    Object.defineProperty(window, 'location', {
+      value: { href: '' },
+      writable: true,
+      configurable: true,
+    })
+
+    render(<LoginGate />)
+    await userEvent.click(screen.getByRole('button', { name: /continue with google/i }))
+
+    await waitFor(() => expect(window.location.href).toBe('https://accounts.google.com/o/oauth2/auth?x=1'))
+    expect(pushMock).not.toHaveBeenCalled()
+  })
+
+  it('returns to the email step and resends to a new address', async () => {
+    const fetchMock = vi
+      .fn()
+      .mockResolvedValueOnce(new Response(JSON.stringify({ sent: true, devCode: '111111' }), { status: 200 }))
+      .mockResolvedValueOnce(new Response(JSON.stringify({ sent: true, devCode: '222222' }), { status: 200 }))
+    vi.stubGlobal('fetch', fetchMock)
+
+    render(<LoginGate />)
+    await userEvent.type(screen.getByLabelText(/email address/i), 'first@example.com')
+    await userEvent.click(screen.getByRole('button', { name: /send me a code/i }))
+    expect(await screen.findByText(/your code is/i)).toBeInTheDocument()
+
+    await userEvent.click(screen.getByRole('button', { name: /change email/i }))
+    const emailInput = await screen.findByLabelText(/email address/i)
+    expect(emailInput).toBeInTheDocument()
+    await userEvent.clear(emailInput)
+    await userEvent.type(emailInput, 'second@example.com')
+    await userEvent.click(screen.getByRole('button', { name: /send me a code/i }))
+
+    await waitFor(() =>
+      expect(fetchMock).toHaveBeenLastCalledWith(
+        '/api/public-auth/otp',
+        expect.objectContaining({ body: JSON.stringify({ email: 'second@example.com' }) }),
+      ),
+    )
+    expect(await screen.findByText(/222222/)).toBeInTheDocument()
+  })
+
+  it('surfaces an error when the OTP request fails', async () => {
+    vi.stubGlobal(
+      'fetch',
+      vi.fn().mockResolvedValue(new Response(JSON.stringify({ error: 'Email is not allowed' }), { status: 400 })),
+    )
+    render(<LoginGate />)
+    await userEvent.type(screen.getByLabelText(/email address/i), 'blocked@example.com')
+    await userEvent.click(screen.getByRole('button', { name: /send me a code/i }))
+    expect(await screen.findByText(/email is not allowed/i)).toBeInTheDocument()
+  })
 })
