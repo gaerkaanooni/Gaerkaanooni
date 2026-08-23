@@ -24,15 +24,14 @@ export default function Footer() {
           <span className="footer-heading">Explore</span>
           <Link href="/">The docket</Link>
           <Link href="/submit">Submit a case</Link>
-          <Link href="/refer">Refer someone</Link>
+          <Link href="/submit?for=other">Refer someone</Link>
           <Link href="/response">Urgent intake</Link>
           <Link href="/about">About</Link>
         </nav>
 
         <nav className="footer-nav" aria-label="Join">
           <span className="footer-heading">Join</span>
-          <Link href="/register">Create an account</Link>
-          <Link href="/login">Sign in</Link>
+          <Link href="/login">Sign in / create account</Link>
         </nav>
 
         <nav className="footer-nav" aria-label="Legal">

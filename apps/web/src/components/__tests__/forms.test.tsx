@@ -1,25 +1,25 @@
 import { describe, expect, it, vi, beforeEach } from 'vitest'
 import { render, screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import CampaignForm from '../CampaignForm'
+import IntakeForm from '../IntakeForm'
 import ResponseIntakeForm from '../ResponseIntakeForm'
 
-describe('CampaignForm', () => {
+describe('IntakeForm (self mode)', () => {
   beforeEach(() => {
     vi.restoreAllMocks()
   })
 
   it('requires a title and a narrative before submitting', async () => {
-    render(<CampaignForm />)
+    render(<IntakeForm initialFor="self" />)
     await userEvent.click(screen.getByRole('button', { name: /submit/i }))
     expect(await screen.findAllByRole('alert').then((a) => a.length)).toBeGreaterThan(0)
   })
 
-  it('posts the campaign and shows a success link', async () => {
+  it('posts the campaign and shows a success confirmation', async () => {
     const fetchMock = vi.fn().mockResolvedValue(new Response(JSON.stringify({ id: 'c1', stage: 'SUBMITTED' }), { status: 201 }))
     vi.stubGlobal('fetch', fetchMock)
 
-    render(<CampaignForm />)
+    render(<IntakeForm initialFor="self" />)
     await userEvent.type(screen.getByLabelText(/title/i), 'Yamuna cleanup')
     await userEvent.type(screen.getByLabelText(/summary/i), 'Cleaning up the river.')
     await userEvent.type(screen.getByLabelText(/what happened/i), 'Ongoing discharge for months.')
@@ -37,7 +37,7 @@ describe('CampaignForm', () => {
         }),
       ),
     )
-    expect(await screen.findByRole('link', { name: /view case/i })).toHaveAttribute('href', '/campaigns/c1')
+    expect(await screen.findByText(/your case has been submitted/i)).toBeInTheDocument()
   })
 
   it('surfaces a server-side validation error', async () => {
@@ -45,7 +45,7 @@ describe('CampaignForm', () => {
       'fetch',
       vi.fn().mockResolvedValue(new Response(JSON.stringify({ error: 'title is required' }), { status: 400 })),
     )
-    render(<CampaignForm />)
+    render(<IntakeForm initialFor="self" />)
     await userEvent.type(screen.getByLabelText(/title/i), 'T')
     await userEvent.type(screen.getByLabelText(/summary/i), 'S')
     await userEvent.type(screen.getByLabelText(/what happened/i), 'Something.')

@@ -37,6 +37,14 @@ const securityHeaders = [
 const nextConfig: NextConfig = {
   transpilePackages: ['@pil/domain', '@pil/db', '@pil/testkit'],
   poweredByHeader: false,
+  async redirects() {
+    return [
+      // Referrals are a mode of the single intake page, not their own page.
+      { source: '/refer', destination: '/submit?for=other', permanent: false },
+      // One auth page: signing up and signing in are the same gate (OTP / Google).
+      { source: '/register', destination: '/login', permanent: false },
+    ]
+  },
   async headers() {
     return [
       {

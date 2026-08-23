@@ -1870,3 +1870,27 @@ main.narrow .lede {
   line-height: 1.6;
   color: var(--ink-soft, #3a3120);
 }
+
+/* ------------------------------------------------------------------ */
+/* Unified intake mode toggle                                          */
+/* ------------------------------------------------------------------ */
+.intake-mode {
+  display: flex;
+  gap: 8px;
+  margin: 18px 0 4px;
+}
+.intake-mode button {
+  flex: 1;
+  padding: 12px 14px;
+  background: var(--paper-light, #fbf6ea);
+  border: 1px solid var(--line-strong, #211b1033);
+  border-radius: 10px;
+  font-weight: 700;
+  color: var(--ink-soft, #3a3120);
+  cursor: pointer;
+}
+.intake-mode button.selected {
+  background: var(--seal, #b3201c);
+  border-color: var(--seal, #b3201c);
+  color: var(--paper-light, #fbf6ea);
+}

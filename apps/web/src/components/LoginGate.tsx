@@ -10,7 +10,7 @@ type Step = 'email' | 'code'
 const INTENT_DEST: Record<string, string> = {
   back: '/',
   submit: '/submit',
-  help: '/refer',
+  help: '/submit?for=other',
 }
 
 export default function LoginGate() {

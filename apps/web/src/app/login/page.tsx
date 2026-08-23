@@ -11,7 +11,7 @@ export default function LoginPage() {
       <h1>Sign in</h1>
       <p className="lede">
         Signing in lets you back cases, follow matters, and submit new ones — it costs nothing until a case is
-        funded.
+        funded. Free, under a minute, and your details are never sold.
       </p>
       <LoginGate />
     </main>

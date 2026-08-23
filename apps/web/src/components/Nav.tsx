@@ -63,7 +63,6 @@ export default function Nav({
         }}
       >
         <Link href="/submit">Submit a case</Link>
-        <Link href="/refer">Refer someone</Link>
         <Link href="/response">Urgent intake</Link>
         <Link href="/about">About</Link>
         {signedIn ? (
@@ -75,10 +74,7 @@ export default function Nav({
             </button>
           </>
         ) : (
-          <>
-            <Link href="/register">Join</Link>
-            <Link href="/login">Sign in</Link>
-          </>
+          <Link href="/login">Sign in</Link>
         )}
       </span>
     </nav>

@@ -19,7 +19,7 @@ export default function CampaignList({ campaigns }: { campaigns: PublicCampaign[
           <Link href="/submit" className="button">
             Submit a case
           </Link>
-          <Link href="/refer" className="button ghost">
+          <Link href="/submit?for=other" className="button ghost">
             Refer someone who needs a hearing
           </Link>
         </div>
