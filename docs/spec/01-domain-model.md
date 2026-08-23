@@ -188,6 +188,40 @@ Any action that moves money writes one.
 | `meta` | json | Before/after snapshot. |
 | `createdAt` | datetime | |
 
+### 2.14 LawyerApplication
+
+A practising lawyer's application to join the volunteer panel (public `/volunteer` signup). See
+06-volunteers.md §5.
+
+| Field | Type | Notes |
+|---|---|---|
+| `id` | string (cuid) | |
+| `userId` | string \| null | Public-session identity; no FK (mirrors Backer.userId). |
+| `email` | string, unique | The application key; re-application after rejection resets the row. |
+| `fullName`, `barCouncilId`, `yearsPractice` | string / string / int | Bar ID verified manually in v1. |
+| `skills` | string[] | `Category` values — exact match against cases. |
+| `region`, `capacityLimit`, `motivation` | string \| null / int / string \| null | Capacity default 2. |
+| `status` | `'PENDING' \| 'APPROVED' \| 'REJECTED'` | Decision is final; rejection allows re-apply. |
+| `decisionReason`, `decidedBy`, `decidedAt` | string / string / datetime | Mandatory reason. |
+
+Invariant: approval provisions exactly one `User(role=LAWYER)` + `Volunteer` pair per approved email.
+
+### 2.15 AssignmentRequest
+
+A volunteer's offer to help on a case ("request → staff confirms"). Unique per
+`(caseId, volunteerId)`; a declined or withdrawn request can be re-made later by resetting the row.
+
+| Field | Type | Notes |
+|---|---|---|
+| `id` | string (cuid) | |
+| `caseId`, `volunteerId` | string | |
+| `status` | `'PENDING' \| 'APPROVED' \| 'DECLINED'` | Withdrawal records as DECLINED with reason "Withdrawn by volunteer". |
+| `note` | string \| null | Applicant's message when offering. |
+| `decisionReason`, `decidedBy`, `decidedAt` | string / string / datetime | |
+
+Invariant: no `Assignment` is created without an APPROVED request, and confirmation re-checks the
+volunteer's availability/capacity inside the transaction (the hard gate).
+
 ## 3. Role model
 
 `admin` | `intern` | `lawyer` | `backer` | `public`. Full matrix in 04-access-control.md.

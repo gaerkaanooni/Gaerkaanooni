@@ -14,6 +14,7 @@ import {
   submitCampaign,
   submitUrgent,
   verifyUrgentSubmission,
+  submitLawyerApplication,
 } from '@pil/db'
 
 const db = prisma as PrismaClient
@@ -311,6 +312,31 @@ The response fund defends exactly this kind of time-critical harm: evictions, de
   return { eviction, dispatched, awaiting }
 }
 
+// A couple of lawyer applications in the staff queue so the volunteer side has
+// something to review on a fresh install (docs/spec/06-volunteers.md §5).
+async function seedLawyerApplications() {
+  await submitLawyerApplication(db, {
+    email: 'advocate.pillai@example.com',
+    fullName: 'Meera Pillai',
+    barCouncilId: 'KL/2041/2013',
+    yearsPractice: 11,
+    skills: ['HOUSING', 'LABOR'],
+    region: 'Kochi',
+    capacityLimit: 3,
+    motivation:
+      'Two decades of watching tenants lose hearings they could have won with counsel. I can carry two matters alongside my practice.',
+  })
+  await submitLawyerApplication(db, {
+    email: 'd.singh@example.com',
+    fullName: 'Devender Singh',
+    barCouncilId: 'UP/3390/2019',
+    yearsPractice: 6,
+    skills: ['CRIMINAL_BAIL', 'CIVIL_LIBERTIES'],
+    region: 'Lucknow',
+    capacityLimit: 2,
+  })
+}
+
 async function main() {
   await truncateAll()
   const users = await createUsers()
@@ -319,6 +345,7 @@ async function main() {
   await seedFundedShelter(users)
   await seedPipeline()
   await seedResponseTrack(users)
+  await seedLawyerApplications()
   console.log('Seeded Gaerkaanooni dev database.')
   console.log('Sign-ins (password for all: seed-pass-123):')
   console.log('  admin@gaerkaanooni.org  (ADMIN)')

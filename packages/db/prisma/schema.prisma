@@ -97,6 +97,14 @@ enum AssignmentStatus {
   RELEASED
 }
 
+// A lawyer's offer to help on a case. Staff confirm it into a real Assignment;
+// nothing counts against capacity until confirmation.
+enum AssignmentRequestStatus {
+  PENDING
+  APPROVED
+  DECLINED
+}
+
 enum LawyerApplicationStatus {
   PENDING
   APPROVED
@@ -144,6 +152,7 @@ model Volunteer {
   capacityLimit    Int        @default(5)
   hoursContributed Int        @default(0)
   assignments      Assignment[]
+  requests         AssignmentRequest[]
   createdAt        DateTime   @default(now())
   updatedAt        DateTime   @updatedAt
 }
@@ -169,6 +178,7 @@ model Case {
   backers       Backer[]
   contributions Contribution[]
   assignments   Assignment[]
+  requests      AssignmentRequest[]
   updates       CaseUpdate[]
   ledgerEntries LedgerEntry[]
   disbursements Disbursement[]
@@ -259,6 +269,28 @@ model Assignment {
   assignedAt  DateTime         @default(now())
 
   @@unique([caseId, volunteerId])
+  @@index([volunteerId])
+}
+
+// An offer of help from a volunteer lawyer ("request → staff confirms").
+// Unique per (caseId, volunteerId): a declined or withdrawn request can be
+// re-made later by resetting the same row to PENDING.
+model AssignmentRequest {
+  id             String                  @id @default(cuid())
+  case           Case                    @relation(fields: [caseId], references: [id], onDelete: Cascade)
+  volunteer      Volunteer               @relation(fields: [volunteerId], references: [id], onDelete: Cascade)
+  caseId         String
+  volunteerId    String
+  status         AssignmentRequestStatus @default(PENDING)
+  note           String?
+  decisionReason String?
+  decidedBy      String?
+  decidedAt      DateTime?
+  createdAt      DateTime                @default(now())
+  updatedAt      DateTime                @updatedAt
+
+  @@unique([caseId, volunteerId])
+  @@index([status, createdAt])
   @@index([volunteerId])
 }
 

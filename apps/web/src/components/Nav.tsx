@@ -64,6 +64,7 @@ export default function Nav({
       >
         <Link href="/submit">Submit a case</Link>
         <Link href="/response">Urgent intake</Link>
+        <Link href="/volunteer">Volunteer</Link>
         <Link href="/about">About</Link>
         {signedIn ? (
           <>

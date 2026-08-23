@@ -11,6 +11,7 @@ const INTENT_DEST: Record<string, string> = {
   back: '/',
   submit: '/submit',
   help: '/submit?for=other',
+  volunteer: '/volunteer',
 }
 
 export default function LoginGate() {

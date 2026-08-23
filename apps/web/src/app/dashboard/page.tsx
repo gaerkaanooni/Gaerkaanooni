@@ -7,6 +7,8 @@ import VolunteerDirectory from '@/components/VolunteerDirectory'
 import FinancialSummaryCard from '@/components/FinancialSummaryCard'
 import DashboardKpis, { type StageCounts } from '@/components/DashboardKpis'
 import ReferralsList from '@/components/ReferralsList'
+import LawyerApplicationsQueue from '@/components/LawyerApplicationsQueue'
+import VolunteerRequestsQueue from '@/components/VolunteerRequestsQueue'
 
 export const dynamic = 'force-dynamic'
 
@@ -47,6 +49,22 @@ export default async function DashboardPage() {
       <section aria-label="Volunteers">
         <h2>Volunteers</h2>
         <VolunteerDirectory volunteers={volunteers} />
+      </section>
+      <section aria-label="Lawyer applications">
+        <h2>Lawyer applications</h2>
+        <p className="section-lede">
+          Practising lawyers asking to join the volunteer panel. Approval provisions their account
+          and panel profile.
+        </p>
+        <LawyerApplicationsQueue />
+      </section>
+      <section aria-label="Offers of help">
+        <h2>Offers of help</h2>
+        <p className="section-lede">
+          Volunteers offering to take on a matter. Confirming checks their capacity first — a stale
+          offer can never over-commit anyone.
+        </p>
+        <VolunteerRequestsQueue />
       </section>
       <section aria-label="Referrals">
         <h2>Referrals</h2>

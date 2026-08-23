@@ -24,7 +24,16 @@ enforced at both the page and API boundaries. See `packages/domain/src/roles.ts`
 | `case.finalize` | ADMIN |
 | `dashboard.view` | INTERN, LAWYER, ADMIN |
 | `finance.view` | ADMIN |
+| `volunteer.review` | ADMIN |
 | `case.back`, `case.follow` | everyone (PUBLIC included) |
+
+### 2.1 Volunteer-lawyer access path
+
+Volunteer lawyers are **not** staff-login users. They authenticate through the public track
+(email OTP / Google) and the `/volunteer` surfaces resolve their panel membership by matching the
+verified session email against provisioned `Volunteer` rows (`src/lib/volunteer-session.ts`).
+Approval of an application provisions a `User(role=LAWYER)` + `Volunteer` pair — an admin action,
+consistent with §1 above. See 06-volunteers.md §5 for the full flow.
 
 ## 3. Enforcement layers
 

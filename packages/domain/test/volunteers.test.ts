@@ -1,6 +1,13 @@
 import { describe, expect, it } from 'vitest'
 import { DomainError } from '../src/errors'
-import { canAssign, isOverCapacity, logHours } from '../src/volunteers'
+import {
+  assertDecidable,
+  canAssign,
+  isOverCapacity,
+  logHours,
+  parseAvailability,
+  validateLawyerApplication,
+} from '../src/volunteers'
 
 describe('isOverCapacity', () => {
   it('flags a volunteer at their capacity limit', () => {
@@ -38,5 +45,54 @@ describe('logHours', () => {
     expect(() => logHours(10, -1)).toThrow(DomainError)
     expect(() => logHours(10, 0.5)).toThrow(DomainError)
     expect(() => logHours(10, 0)).toThrow(DomainError)
+  })
+})
+
+describe('validateLawyerApplication', () => {
+  const valid = {
+    fullName: 'Asha Rao',
+    barCouncilId: 'DL/1017/2015',
+    yearsPractice: 9,
+    skills: ['ENVIRONMENT', 'HOUSING'],
+  }
+
+  it('accepts a valid application and applies defaults', () => {
+    const clean = validateLawyerApplication(valid)
+    expect(clean.fullName).toBe('Asha Rao')
+    expect(clean.capacityLimit).toBe(2)
+    expect(clean.region).toBeNull()
+    expect(clean.motivation).toBeNull()
+  })
+
+  it('dedupes specialisations', () => {
+    const clean = validateLawyerApplication({ ...valid, skills: ['ENVIRONMENT', 'ENVIRONMENT'] })
+    expect(clean.skills).toEqual(['ENVIRONMENT'])
+  })
+
+  it('rejects missing names, unknown specialisations, and bad numbers', () => {
+    expect(() => validateLawyerApplication({ ...valid, fullName: 'A' })).toThrow(DomainError)
+    expect(() => validateLawyerApplication({ ...valid, barCouncilId: '' })).toThrow(DomainError)
+    expect(() => validateLawyerApplication({ ...valid, skills: ['ASTROLOGY'] })).toThrow(DomainError)
+    expect(() => validateLawyerApplication({ ...valid, yearsPractice: -1 })).toThrow(DomainError)
+    expect(() => validateLawyerApplication({ ...valid, yearsPractice: 4.5 })).toThrow(DomainError)
+    expect(() => validateLawyerApplication({ ...valid, capacityLimit: 21 })).toThrow(DomainError)
+    expect(() => validateLawyerApplication({ ...valid, capacityLimit: 0 })).toThrow(DomainError)
+  })
+})
+
+describe('assertDecidable', () => {
+  it('allows only PENDING applications to be decided', () => {
+    expect(() => assertDecidable('PENDING')).not.toThrow()
+    expect(() => assertDecidable('APPROVED')).toThrow(DomainError)
+    expect(() => assertDecidable('REJECTED')).toThrow(DomainError)
+  })
+})
+
+describe('parseAvailability', () => {
+  it('normalises case and rejects junk', () => {
+    expect(parseAvailability('BUSY')).toBe('busy')
+    expect(parseAvailability('away')).toBe('away')
+    expect(parseAvailability('vacationing')).toBeNull()
+    expect(parseAvailability(42)).toBeNull()
   })
 })
