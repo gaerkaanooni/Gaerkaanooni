@@ -43,9 +43,6 @@ export default async function Home() {
             <a href="/submit" className="button ghost">
               Submit a case
             </a>
-            <a href="/submit?for=other" className="button ghost">
-              Refer someone
-            </a>
             <a href="#docket" className="button ghost">
               Explore the docket
             </a>

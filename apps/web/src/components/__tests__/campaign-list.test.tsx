@@ -26,7 +26,7 @@ describe('CampaignList', () => {
     render(<CampaignList campaigns={[]} />)
     expect(screen.getByText('No open matters right now')).toBeInTheDocument()
     expect(screen.getByRole('link', { name: /submit a case/i })).toBeInTheDocument()
-    expect(screen.getByRole('link', { name: /refer someone/i })).toBeInTheDocument()
+    expect(screen.queryByRole('link', { name: /refer someone/i })).not.toBeInTheDocument()
   })
 
   it('links each campaign to its detail page with progress and support count', () => {

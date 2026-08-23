@@ -24,7 +24,6 @@ export default function Footer() {
           <span className="footer-heading">Explore</span>
           <Link href="/">The docket</Link>
           <Link href="/submit">Submit a case</Link>
-          <Link href="/submit?for=other">Refer someone</Link>
           <Link href="/response">Urgent intake</Link>
           <Link href="/about">About</Link>
         </nav>

@@ -19,10 +19,10 @@ export default function CampaignList({ campaigns }: { campaigns: PublicCampaign[
           <Link href="/submit" className="button">
             Submit a case
           </Link>
-          <Link href="/submit?for=other" className="button ghost">
-            Refer someone who needs a hearing
-          </Link>
         </div>
+        <p className="muted" style={{ marginTop: 12, fontSize: '0.9rem' }}>
+          It can be your own matter, or one you put forward for someone else.
+        </p>
       </div>
     )
   }
