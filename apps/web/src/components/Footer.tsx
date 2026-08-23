@@ -36,6 +36,8 @@ export default function Footer() {
 
         <nav className="footer-nav" aria-label="Legal">
           <span className="footer-heading">Legal</span>
+          <Link href="/legal/privacy">Privacy</Link>
+          <Link href="/legal/terms">Terms</Link>
           <Link href="/about">How we handle money</Link>
           <a href="mailto:help@gaerkaanooni.in">Contact us</a>
         </nav>

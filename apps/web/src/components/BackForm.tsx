@@ -1,5 +1,6 @@
 'use client'
 
+import Link from 'next/link'
 import { useState } from 'react'
 import { track } from '@/lib/analytics'
 
@@ -268,7 +269,10 @@ export default function BackForm({ campaignId }: { campaignId: string }) {
       </button>
       <p className="back-reassure">
         You are only charged if this matter reaches its goal — otherwise every backer is refunded in full. 95% reaches
-        the case.
+        the case.{' '}
+        <Link href="/legal/terms">
+          Terms
+        </Link>
       </p>
       {step === 'error' && error && (
         <p role="alert" className="gate-error">

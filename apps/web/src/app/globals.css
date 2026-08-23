@@ -1894,3 +1894,29 @@ main.narrow .lede {
   border-color: var(--seal, #b3201c);
   color: var(--paper-light, #fbf6ea);
 }
+
+/* Prose headings + lists (legal pages) */
+.prose h3 {
+  font-family: var(--font-display), var(--font-body);
+  font-size: 1.05rem;
+  margin: 22px 0 8px;
+}
+.prose h3:first-child {
+  margin-top: 0;
+}
+.prose ul {
+  margin: 0;
+  padding-left: 20px;
+  max-width: 68ch;
+  color: var(--ink-soft);
+}
+.prose li {
+  line-height: 1.75;
+  margin-bottom: 6px;
+}
+
+/* BackForm reassure link inherits muted tone */
+.back-reassure a {
+  color: var(--ink);
+  text-decoration: underline;
+}
