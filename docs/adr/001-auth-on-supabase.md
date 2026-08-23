@@ -1,6 +1,6 @@
 # ADR-001 — Unify all auth on Supabase
 
-Status: **Proposed / to-execute on real keys** · Created: pre-launch hardening pass
+Status: **Implemented (offline/mock path done & verified); live Supabase path is a thin shim awaiting real keys** · Updated after execution
 
 ## Context
 
@@ -17,18 +17,28 @@ Gaerkaanooni currently has **two auth providers**:
 We want **one auth provider** (Supabase) for everyone, while keeping the staff/ADMIN role model (Supabase
 Auth has no roles) and an offline mock so tests and local dev still work without real keys.
 
-## Decision (deferred to a real-keys round)
+## Decision (implemented)
 
-**Do not rip out Auth.js yet.** Instead, unify staff onto the Supabase email-OTP flow (like public),
-resolving the staff `Role` from the Prisma `User` row by email, and keep the Auth.js `Credentials`
-provider only as the offline/dev mock fallback for staff. This honors "one auth provider when live" and
-"an offline mock for tests/local" from the objective.
+**Auth.js is removed.** All auth now flows through one unified server-side module,
+`apps/web/src/lib/auth-session.ts`:
 
-Why not execute now:
-- No live Supabase project exists to validate the staff-session + role-resolution flow end-to-end.
-- The migration touches 10+ files plus the auth test suite; a partial or mis-validated change could break
-  the working staff login and the `auth.test.tsx` suite.
-- This is pre-launch; the public path (majority of users) is already unified on Supabase.
+- **Public** — Supabase email-OTP + Google (unchanged), gated on Supabase keys with an offline mock.
+- **Staff** — **Supabase email + password** (`signInWithPassword`), resolving the staff `Role` from the
+  Prisma `User` row by email. Offline, the mock verifies against the bcrypt `passwordHash` and writes a
+  signed `pil_staff_session` cookie. Both modes share the same `getStaffSession()`/`signInStaff()`
+  surface, so the live path is a thin shim over the already-tested code.
+- Files replaced: `auth.ts` (deleted), `api/auth/[...nextauth]/route.ts` (deleted),
+  `types/next-auth.d.ts` (deleted); `next-auth` dependency removed.
+- New: `lib/auth-session.ts`, `api/staff/login`, `api/staff/logout`. `requireRole`, dashboard/analytics
+  pages, layout, middleware, Nav sign-out all switched to the unified session. `bcryptjs` + the
+  `User.passwordHash` column are retained as the offline-mock credential check.
+- Verified offline (this repo's local DB): staff login with `admin@pilpromax.org`
+  (`seed-pass-123`) returns `{role: "ADMIN"}` and grants `/dashboard` (200).
+
+### What remains (live-validation, needs real keys)
+No live Supabase project exists, so the real `signInWithPassword` call + session cookie path is not
+executed here — it is gated behind the same `isSupabaseConfigured()` branch and should be smoke-tested
+once keys are provisioned. No further code change is expected.
 
 ## Target architecture (when executed)
 

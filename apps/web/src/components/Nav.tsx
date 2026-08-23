@@ -3,7 +3,6 @@
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
-import { signOut } from 'next-auth/react'
 import Logo from '@/components/Logo'
 
 export default function Nav({
@@ -22,7 +21,9 @@ export default function Nav({
 
   async function handleSignOut() {
     if (kind === 'staff') {
-      await signOut({ callbackUrl: '/' })
+      await fetch('/api/staff/logout', { method: 'POST' })
+      router.push('/')
+      router.refresh()
       return
     }
     await fetch('/api/public-auth/logout', { method: 'POST' })

@@ -1,5 +1,5 @@
 import { redirect } from 'next/navigation'
-import { auth } from '@/auth'
+import { getStaffSession } from '@/lib/auth-session'
 import { canPerform, type Role } from '@pil/domain'
 import { prisma } from '@pil/db'
 import CaseDocuments from '@/components/CaseDocuments'
@@ -9,8 +9,8 @@ export const dynamic = 'force-dynamic'
 type Props = { params: Promise<{ id: string }> }
 
 export default async function CaseDocumentsPage({ params }: Props) {
-  const session = await auth()
-  if (!session?.user || !canPerform(session.user.role as Role, 'case.update')) {
+  const session = await getStaffSession()
+  if (!session || !canPerform(session.role as Role, 'case.update')) {
     redirect('/dashboard')
   }
 

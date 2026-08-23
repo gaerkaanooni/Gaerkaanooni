@@ -69,7 +69,7 @@ export async function POST(request: Request, { params }: RouteContext) {
     fileName: file.name,
     mimeType: file.type,
     sizeBytes: buffer.byteLength,
-    uploadedById: guard.session?.user?.id ?? guard.role ?? null,
+    uploadedById: guard.session?.userId ?? guard.role ?? null,
   })
 
   return NextResponse.json({ ok: true, document: row }, { status: 201 })

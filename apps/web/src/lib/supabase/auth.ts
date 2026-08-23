@@ -105,6 +105,23 @@ export async function signOutSupabase(): Promise<void> {
   await supabase.auth.signOut()
 }
 
+/**
+ * Sign a staff member in with Supabase email + password. Sets the Supabase
+ * session cookies (managed by the SSR client). Returns the session user view, or
+ * null on bad credentials. Staff use email+password (Supabase `signInWithPassword`),
+ * while public users use email OTP / Google — both on the same provider.
+ */
+export async function signInWithStaffPassword(
+  email: string,
+  password: string,
+  clientOverride?: SupabaseClient,
+): Promise<SupabaseUserView | null> {
+  const supabase = clientOverride ?? (await createClient())
+  const { data, error } = await supabase.auth.signInWithPassword({ email, password })
+  if (error || !data.user) return null
+  return toView(data.user as Parameters<typeof toView>[0])
+}
+
 async function upsertPrismaUser(view: SupabaseUserView): Promise<void> {
   await prisma.user.upsert({
     where: { email: view.email },

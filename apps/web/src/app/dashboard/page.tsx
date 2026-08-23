@@ -1,5 +1,5 @@
 import { redirect } from 'next/navigation'
-import { auth } from '@/auth'
+import { getStaffSession } from '@/lib/auth-session'
 import { canPerform, type Role } from '@pil/domain'
 import { getCaseList, getFinancialSummary, getVolunteerDirectory, prisma } from '@pil/db'
 import CaseTable from '@/components/CaseTable'
@@ -11,9 +11,9 @@ import ReferralsList from '@/components/ReferralsList'
 export const dynamic = 'force-dynamic'
 
 export default async function DashboardPage() {
-  const session = await auth()
-  if (!session?.user || !canPerform(session.user.role as Role, 'dashboard.view')) {
-    redirect('/login')
+  const session = await getStaffSession()
+  if (!session || !canPerform(session.role as Role, 'dashboard.view')) {
+    redirect('/login/staff')
   }
 
   const [cases, volunteers, finances, stageGroups] = await Promise.all([

@@ -4,15 +4,11 @@ import userEvent from '@testing-library/user-event'
 import LoginForm from '../LoginForm'
 import RegisterForm from '../RegisterForm'
 
-const { pushMock, refreshMock, signInMock } = vi.hoisted(() => ({
+const { pushMock, refreshMock } = vi.hoisted(() => ({
   pushMock: vi.fn(),
   refreshMock: vi.fn(),
-  signInMock: vi.fn(),
 }))
 
-vi.mock('next-auth/react', () => ({
-  signIn: signInMock,
-}))
 vi.mock('next/navigation', () => ({
   useRouter: () => ({ push: pushMock, refresh: refreshMock }),
 }))
@@ -22,8 +18,11 @@ describe('LoginForm', () => {
     vi.clearAllMocks()
   })
 
-  it('calls signIn with the credentials and navigates home on success', async () => {
-    signInMock.mockResolvedValue({ error: null })
+  it('posts credentials to the unified staff login and navigates to the dashboard on success', async () => {
+    const fetchMock = vi
+      .fn()
+      .mockResolvedValue(new Response(JSON.stringify({ ok: true, email: 'staff@example.com', role: 'ADMIN' }), { status: 200 }))
+    vi.stubGlobal('fetch', fetchMock)
 
     render(<LoginForm />)
     await userEvent.type(screen.getByLabelText(/email/i), 'staff@example.com')
@@ -31,17 +30,23 @@ describe('LoginForm', () => {
     await userEvent.click(screen.getByRole('button', { name: /sign in/i }))
 
     await waitFor(() =>
-      expect(signInMock).toHaveBeenCalledWith('credentials', {
-        email: 'staff@example.com',
-        password: 'long-enough-pass',
-        redirect: false,
-      }),
+      expect(fetchMock).toHaveBeenCalledWith(
+        '/api/staff/login',
+        expect.objectContaining({
+          method: 'POST',
+          body: JSON.stringify({ email: 'staff@example.com', password: 'long-enough-pass' }),
+        }),
+      ),
     )
-    expect(pushMock).toHaveBeenCalledWith('/')
+    expect(pushMock).toHaveBeenCalledWith('/dashboard')
   })
 
   it('shows an error on failed credentials', async () => {
-    signInMock.mockResolvedValue({ error: 'CredentialsSignin' })
+    const fetchMock = vi
+      .fn()
+      .mockResolvedValue(new Response(JSON.stringify({ error: 'Invalid email or password' }), { status: 401 }))
+    vi.stubGlobal('fetch', fetchMock)
+
     render(<LoginForm />)
     await userEvent.type(screen.getByLabelText(/email/i), 'x@y.com')
     await userEvent.type(screen.getByLabelText(/password/i), 'wrong-password')

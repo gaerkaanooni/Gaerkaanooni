@@ -1,9 +1,13 @@
 'use client'
 
 import { useState } from 'react'
-import { signIn } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
+import { track } from '@/lib/analytics'
 
+/**
+ * Staff sign-in (email + password). Posts to the unified Supabase/mock session
+ * so the dashboard guard and role checks resolve through the same path.
+ */
 export default function LoginForm() {
   const router = useRouter()
   const [email, setEmail] = useState('')
@@ -15,14 +19,22 @@ export default function LoginForm() {
     e.preventDefault()
     setSubmitting(true)
     setError('')
-    const res = await signIn('credentials', { email, password, redirect: false })
-    if (res?.error) {
-      setError('Invalid email or password')
+    try {
+      const res = await fetch('/api/staff/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password }),
+      })
+      const body = await res.json()
+      if (!res.ok) throw new Error(body.error ?? 'Invalid email or password')
+      void track({ name: 'login_complete', props: { provider: 'password' } })
+      router.push('/dashboard')
+      router.refresh()
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Invalid email or password')
+    } finally {
       setSubmitting(false)
-      return
     }
-    router.push('/')
-    router.refresh()
   }
 
   return (

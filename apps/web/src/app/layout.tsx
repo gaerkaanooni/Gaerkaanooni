@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import { Fraunces, Martian_Mono, Spectral, Tiro_Devanagari_Hindi } from 'next/font/google'
-import { auth } from '@/auth'
+import { getStaffSession } from '@/lib/auth-session'
 import { canPerform, type Role } from '@pil/domain'
 import Nav from '@/components/Nav'
 import Footer from '@/components/Footer'
@@ -66,18 +66,18 @@ export const metadata: Metadata = {
 }
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
-  const [staff, pub] = await Promise.all([auth(), readPublicSession()])
-  const isStaff = Boolean(staff?.user && canPerform(staff.user.role as Role, 'dashboard.view'))
-  const isAdmin = Boolean(staff?.user && canPerform(staff.user.role as Role, 'finance.view'))
+  const [staff, pub] = await Promise.all([getStaffSession(), readPublicSession()])
+  const isStaff = Boolean(staff && canPerform(staff.role as Role, 'dashboard.view'))
+  const isAdmin = Boolean(staff && canPerform(staff.role as Role, 'finance.view'))
   return (
     <html lang="en" className={`${display.variable} ${body.variable} ${mono.variable} ${devanagari.variable}`}>
       <body>
         <AnalyticsTracker />
         <Nav
-          signedIn={Boolean(staff?.user || pub)}
+          signedIn={Boolean(staff || pub)}
           isStaff={isStaff}
           isAdmin={isAdmin}
-          kind={staff?.user ? 'staff' : pub ? 'public' : null}
+          kind={staff ? 'staff' : pub ? 'public' : null}
         />
         {children}
         <Footer />
