@@ -97,6 +97,12 @@ enum AssignmentStatus {
   RELEASED
 }
 
+enum LawyerApplicationStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
 enum LedgerType {
   CONTRIBUTION
   REFUND
@@ -254,6 +260,33 @@ model Assignment {
 
   @@unique([caseId, volunteerId])
   @@index([volunteerId])
+}
+
+// A practising lawyer's application to join the volunteer panel (public
+// /volunteer signup → staff review → approval provisions the Volunteer row).
+// `userId` is the public-session identity, kept without an FK like
+// Backer.userId because public identities live in Supabase/mock, not User.
+// Email is unique: one live application per person; a rejected applicant may
+// re-apply (the same row is reset to PENDING).
+model LawyerApplication {
+  id             String                  @id @default(cuid())
+  userId         String?
+  email          String                  @unique
+  fullName       String
+  barCouncilId   String
+  yearsPractice  Int
+  skills         String[]
+  region         String?
+  capacityLimit  Int                     @default(2)
+  motivation     String?
+  status         LawyerApplicationStatus @default(PENDING)
+  decisionReason String?
+  decidedBy      String?
+  decidedAt      DateTime?
+  createdAt      DateTime                @default(now())
+  updatedAt      DateTime                @updatedAt
+
+  @@index([status, createdAt])
 }
 
 model LedgerEntry {

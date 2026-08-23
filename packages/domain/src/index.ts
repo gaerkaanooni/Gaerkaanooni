@@ -29,7 +29,22 @@ export {
   isStageStale,
   isUpdateOverdue,
 } from './update-cadence'
-export { canAssign, isOverCapacity, logHours, type VolunteerAvailability, type VolunteerRole } from './volunteers'
+export {
+  assertDecidable,
+  canAssign,
+  isOverCapacity,
+  logHours,
+  parseAvailability,
+  validateLawyerApplication,
+  MAX_CAPACITY_LIMIT,
+  MAX_YEARS_PRACTICE,
+  MIN_CAPACITY_LIMIT,
+  type ApplicationStatus,
+  type LawyerApplicationInput,
+  type Specialization,
+  type VolunteerAvailability,
+  type VolunteerRole,
+} from './volunteers'
 export { createAuditEntry, requiresSignOff, type AuditEntry } from './audit'
 export { isCategory, categoryLabel, VALID_CATEGORIES, CATEGORY_LABELS, type CategoryName } from './categories'
 export { assertRole, canPerform, STAFF_ROLES, type Action, type Role } from './roles'

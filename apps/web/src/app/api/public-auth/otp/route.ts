@@ -19,6 +19,11 @@ export async function POST(request: Request) {
   if (!EMAIL_RE.test(email)) {
     return NextResponse.json({ error: 'Enter a valid email address' }, { status: 400 })
   }
-  const result = await requestOtp(email)
-  return NextResponse.json(result)
+  try {
+    const result = await requestOtp(email)
+    return NextResponse.json(result)
+  } catch (err) {
+    console.error('otp request failed:', err)
+    return NextResponse.json({ error: 'Could not send the code right now. Please try again shortly.' }, { status: 502 })
+  }
 }

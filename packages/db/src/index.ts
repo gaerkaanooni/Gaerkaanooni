@@ -62,3 +62,22 @@ export {
 } from './services/dashboard'
 export { registerUser, setRole, verifyCredentials, type RegisterUserInput } from './services/auth'
 export { getAnalytics, type Analytics, type CategoryCount, type WeeklyContribution } from './services/analytics'
+export {
+  submitLawyerApplication,
+  listLawyerApplications,
+  getLawyerApplicationByEmail,
+  decideLawyerApplication,
+  getVolunteerForEmail,
+  getEngagementBoard,
+  claimCaseForVolunteer,
+  releaseAssignment,
+  logVolunteerHours,
+  updateVolunteerPreferences,
+  type SubmitLawyerApplicationInput,
+  type LawyerApplicationListRow,
+  type DecideLawyerApplicationInput,
+  type VolunteerProfile,
+  type OpenCaseRow,
+  type MyAssignmentRow,
+  type EngagementBoard,
+} from './services/volunteers'

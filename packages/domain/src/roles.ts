@@ -14,6 +14,7 @@ export type Action =
   | 'finance.view'
   | 'case.back'
   | 'case.follow'
+  | 'volunteer.review'
 
 export const STAFF_ROLES: readonly Role[] = ['INTERN', 'LAWYER', 'ADMIN'] as const
 
@@ -29,6 +30,9 @@ const ALLOWED: Readonly<Record<Action, readonly Role[]>> = {
   'finance.view': ['ADMIN'],
   'case.back': ['BACKER', 'PUBLIC', 'INTERN', 'LAWYER', 'ADMIN'],
   'case.follow': ['BACKER', 'PUBLIC', 'INTERN', 'LAWYER', 'ADMIN'],
+  // Reviewing volunteer-lawyer applications provisions accounts — an admin action,
+  // mirroring `setRole` (docs/spec/08-auth-rbac.md §1).
+  'volunteer.review': ['ADMIN'],
 }
 
 export function canPerform(role: Role | null | undefined, action: Action): boolean {
