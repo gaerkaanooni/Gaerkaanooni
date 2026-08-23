@@ -74,7 +74,10 @@ export default function Nav({
             </button>
           </>
         ) : (
-          <Link href="/login">Sign in</Link>
+          <>
+            <Link href="/register">Join</Link>
+            <Link href="/login">Sign in</Link>
+          </>
         )}
       </span>
     </nav>

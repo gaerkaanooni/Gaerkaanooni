@@ -6,7 +6,26 @@ import Countdown from '@/components/Countdown'
 const STAGGER = ['d1', 'd2', 'd3', 'd4', 'd5', 'd6']
 
 export default function CampaignList({ campaigns }: { campaigns: PublicCampaign[] }) {
-  if (campaigns.length === 0) return <p className="muted">No open campaigns right now.</p>
+  if (campaigns.length === 0) {
+    return (
+      <div className="docket-empty reveal">
+        <p className="kicker">The docket is being prepared</p>
+        <h3>No open matters right now</h3>
+        <p>
+          Screening and fundraising for the first matters is underway. If you know of a legal injustice that needs a
+          hearing — or a person who needs help to reach one — you can help start it today.
+        </p>
+        <div className="cta-row">
+          <Link href="/submit" className="button">
+            Submit a case
+          </Link>
+          <Link href="/refer" className="button ghost">
+            Refer someone who needs a hearing
+          </Link>
+        </div>
+      </div>
+    )
+  }
   return (
     <ul>
       {campaigns.map((c, i) => (

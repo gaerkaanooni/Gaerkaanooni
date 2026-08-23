@@ -1,18 +1,35 @@
 'use client'
 
-import { useState } from 'react'
-import { useRouter } from 'next/navigation'
+import { useState, useCallback } from 'react'
+import { useRouter, useSearchParams } from 'next/navigation'
+import { track } from '@/lib/analytics'
 
 type Step = 'email' | 'code'
 
+/** Post-login destination per registered intent. */
+const INTENT_DEST: Record<string, string> = {
+  back: '/',
+  submit: '/submit',
+  help: '/refer',
+}
+
 export default function LoginGate() {
   const router = useRouter()
+  const searchParams = useSearchParams()
   const [step, setStep] = useState<Step>('email')
   const [email, setEmail] = useState('')
   const [code, setCode] = useState('')
   const [devCode, setDevCode] = useState<string | null>(null)
   const [error, setError] = useState('')
   const [busy, setBusy] = useState(false)
+
+  const intent = searchParams.get('intent') ?? ''
+  const afterLogin = INTENT_DEST[intent] ?? '/'
+
+  const goAfterLogin = useCallback(() => {
+    router.push(afterLogin)
+    router.refresh()
+  }, [afterLogin, router])
 
   async function sendOtp(e: React.FormEvent) {
     e.preventDefault()
@@ -47,8 +64,8 @@ export default function LoginGate() {
       })
       const body = await res.json()
       if (!res.ok) throw new Error(body.error ?? 'Invalid code')
-      router.push('/')
-      router.refresh()
+      void track({ name: 'login_complete', props: { provider: 'email' } })
+      goAfterLogin()
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Invalid code')
     } finally {
@@ -69,8 +86,8 @@ export default function LoginGate() {
         return
       }
       // Mock mode completes instantly.
-      router.push('/')
-      router.refresh()
+      void track({ name: 'login_complete', props: { provider: 'google' } })
+      goAfterLogin()
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Google sign-in failed')
     } finally {

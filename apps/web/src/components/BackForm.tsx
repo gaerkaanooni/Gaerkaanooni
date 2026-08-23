@@ -16,6 +16,7 @@ type Method = (typeof METHODS)[number]
 type Step = 'amount' | 'checkout' | 'processing' | 'done' | 'error'
 
 const PLATFORM_FEE_PERCENT = 5
+const QUICK_AMOUNTS = [100, 250, 500, 1000, 2500] as const
 
 function loadRazorpayScript(): Promise<void> {
   return new Promise((resolve, reject) => {
@@ -233,7 +234,23 @@ export default function BackForm({ campaignId }: { campaignId: string }) {
 
   return (
     <form onSubmit={submit}>
-      <label htmlFor="amount">Amount (₹)</label>
+      <div className="back-head">
+        <p className="back-title">Back this matter</p>
+      </div>
+      <div className="quick-amounts">
+        {QUICK_AMOUNTS.map((amt) => (
+          <button
+            type="button"
+            key={amt}
+            className={`quick-amount ${Number(amount) === amt ? 'selected' : ''}`}
+            onClick={() => setAmount(String(amt))}
+            disabled={busy}
+          >
+            ₹{amt.toLocaleString('en-IN')}
+          </button>
+        ))}
+      </div>
+      <label htmlFor="amount">Or enter an amount (₹)</label>
       <input
         id="amount"
         type="number"
@@ -242,10 +259,15 @@ export default function BackForm({ campaignId }: { campaignId: string }) {
         value={amount}
         onChange={(e) => setAmount(e.target.value)}
         disabled={busy}
+        placeholder="Your amount, in rupees"
       />
       <button type="submit" disabled={busy}>
         {busy ? 'Contacting…' : 'Back this campaign'}
       </button>
+      <p className="back-reassure">
+        You are only charged if this matter reaches its goal — otherwise every backer is refunded in full. 95% reaches
+        the case.
+      </p>
       {step === 'error' && error && (
         <p role="alert" className="gate-error">
           {error}

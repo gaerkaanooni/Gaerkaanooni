@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server'
 import { createReferral, listReferrals, prisma } from '@pil/db'
 import { isCategory } from '@pil/domain'
 import { requireRole } from '@/lib/requireRole'
+import { guardRateLimit } from '@/lib/rateLimit'
 
 /**
  * Public referral intake. Open to anyone (no account required) so a friend,
@@ -12,6 +13,10 @@ import { requireRole } from '@/lib/requireRole'
  * they have consented to be contacted (`contactConsented`).
  */
 export async function POST(request: Request) {
+  // Prevent referral spam: at most a handful per minute per IP.
+  const tooMany = guardRateLimit({ request, discriminator: 'referral', limit: 10, windowMs: 60_000 })
+  if (tooMany) return tooMany
+
   let body: Record<string, unknown>
   try {
     body = (await request.json()) as Record<string, unknown>

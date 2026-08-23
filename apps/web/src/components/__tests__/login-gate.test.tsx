@@ -10,6 +10,7 @@ const { pushMock, refreshMock } = vi.hoisted(() => ({
 
 vi.mock('next/navigation', () => ({
   useRouter: () => ({ push: pushMock, refresh: refreshMock }),
+  useSearchParams: () => new URLSearchParams(),
 }))
 
 beforeEach(() => {

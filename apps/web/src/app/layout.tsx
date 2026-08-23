@@ -3,6 +3,8 @@ import { Fraunces, Martian_Mono, Spectral, Tiro_Devanagari_Hindi } from 'next/fo
 import { auth } from '@/auth'
 import { canPerform, type Role } from '@pil/domain'
 import Nav from '@/components/Nav'
+import Footer from '@/components/Footer'
+import AnalyticsTracker from '@/components/AnalyticsTracker'
 import { readPublicSession } from '@/lib/public-auth'
 import './globals.css'
 
@@ -70,6 +72,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   return (
     <html lang="en" className={`${display.variable} ${body.variable} ${mono.variable} ${devanagari.variable}`}>
       <body>
+        <AnalyticsTracker />
         <Nav
           signedIn={Boolean(staff?.user || pub)}
           isStaff={isStaff}
@@ -77,6 +80,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           kind={staff?.user ? 'staff' : pub ? 'public' : null}
         />
         {children}
+        <Footer />
       </body>
     </html>
   )

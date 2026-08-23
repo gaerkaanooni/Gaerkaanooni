@@ -1564,3 +1564,175 @@ main.narrow .lede {
   font-weight: 600;
   padding: 0 6px;
 }
+
+/* ------------------------------------------------------------------ */
+/* BackForm conversion (quick amounts + reassurance)                   */
+/* ------------------------------------------------------------------ */
+.back-head {
+  margin-bottom: 4px;
+}
+.back-title {
+  font-family: var(--font-display), var(--font-body);
+  font-weight: 700;
+  font-size: 18px;
+  margin: 18px 0 10px;
+}
+.quick-amounts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+.quick-amount {
+  background: var(--paper-light, #fbf6ea);
+  border: 1px solid var(--line-strong, #211b1033);
+  border-radius: 999px;
+  padding: 8px 16px;
+  font-weight: 600;
+  cursor: pointer;
+  color: var(--ink);
+}
+.quick-amount:hover {
+  border-color: var(--seal, #b3201c);
+  color: var(--seal, #b3201c);
+}
+.quick-amount.selected {
+  background: var(--seal, #b3201c);
+  border-color: var(--seal, #b3201c);
+  color: var(--paper-light, #fbf6ea);
+}
+.back-reassure {
+  margin: 12px 0 0;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--muted, #6d6246);
+}
+
+.docket-empty {
+  border: 1px dashed var(--line-strong, #211b1033);
+  border-radius: 12px;
+  padding: 28px 24px;
+  text-align: center;
+  max-width: 560px;
+  margin: 0 auto;
+}
+.docket-empty h3 {
+  font-family: var(--font-display), var(--font-body);
+  margin: 6px 0 10px;
+}
+.docket-empty p {
+  color: var(--muted, #6d6246);
+  line-height: 1.7;
+  margin-bottom: 16px;
+}
+.docket-empty .cta-row {
+  justify-content: center;
+}
+
+/* ------------------------------------------------------------------ */
+/* Onboarding / registration intent cards                              */
+/* ------------------------------------------------------------------ */
+.onboard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 14px;
+  margin-top: 20px;
+}
+.onboard-card {
+  text-align: left;
+  background: var(--paper-light, #fbf6ea);
+  border: 1px solid var(--line-strong, #211b1033);
+  border-radius: 12px;
+  padding: 20px 18px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  transition: box-shadow 0.15s ease, transform 0.15s ease;
+}
+.onboard-card:hover {
+  box-shadow: var(--shadow, 0 10px 24px -12px rgba(33,27,16,.35));
+  transform: translateY(-2px);
+}
+.onboard-card.selected {
+  border-color: var(--seal, #b3201c);
+  box-shadow: 0 0 0 2px var(--seal-soft, rgba(179,32,28,.12));
+}
+.onboard-card h2 {
+  font-family: var(--font-display), var(--font-body);
+  font-size: 19px;
+  margin: 4px 0 0;
+}
+.onboard-card p {
+  color: var(--muted, #6d6246);
+  line-height: 1.6;
+  margin: 0;
+  font-size: 0.95rem;
+}
+.onboard-cta {
+  margin-top: 10px;
+  font-weight: 700;
+  color: var(--seal, #b3201c);
+}
+
+/* ------------------------------------------------------------------ */
+/* Site footer                                                         */
+/* ------------------------------------------------------------------ */
+.site-footer {
+  margin-top: 56px;
+  border-top: 2px solid var(--ink, #211b10);
+  background: var(--paper-light, #fbf6ea);
+}
+.footer-inner {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 28px 20px 34px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 28px;
+}
+.footer-brand .wordmark {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-display), var(--font-body);
+  font-weight: 900;
+  font-size: 20px;
+  color: var(--ink, #211b10);
+}
+.footer-brand .wordmark em {
+  font-style: normal;
+  color: var(--seal, #b3201c);
+}
+.footer-brand p {
+  color: var(--muted, #6d6246);
+  line-height: 1.6;
+  font-size: 0.92rem;
+  margin: 10px 0 4px;
+}
+.footer-note {
+  font-size: 0.82rem !important;
+  opacity: 0.85;
+}
+.footer-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.footer-heading {
+  font-weight: 700;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--ink-soft, #3a3120);
+  margin-bottom: 2px;
+}
+.footer-nav a {
+  color: var(--muted, #6d6246);
+  text-decoration: none;
+}
+.footer-nav a:hover {
+  color: var(--seal, #b3201c);
+  text-decoration: underline;
+}

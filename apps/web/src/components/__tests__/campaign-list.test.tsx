@@ -24,7 +24,9 @@ const liveCampaign = {
 describe('CampaignList', () => {
   it('shows an empty state when no campaigns are live', () => {
     render(<CampaignList campaigns={[]} />)
-    expect(screen.getByText('No open campaigns right now.')).toBeInTheDocument()
+    expect(screen.getByText('No open matters right now')).toBeInTheDocument()
+    expect(screen.getByRole('link', { name: /submit a case/i })).toBeInTheDocument()
+    expect(screen.getByRole('link', { name: /refer someone/i })).toBeInTheDocument()
   })
 
   it('links each campaign to its detail page with progress and support count', () => {

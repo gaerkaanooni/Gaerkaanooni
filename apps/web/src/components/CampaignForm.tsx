@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { VALID_CATEGORIES, categoryLabel, type CategoryName } from '@pil/domain'
+import { track } from '@/lib/analytics'
 
 const CATEGORIES = VALID_CATEGORIES
 
@@ -62,6 +63,10 @@ export default function CampaignForm() {
       })
       const body = await res.json()
       if (!res.ok) throw new Error(body.error ?? 'Submission failed')
+      void track({
+        name: 'submit_case',
+        props: { category: form.category, track: 'CAMPAIGN' },
+      })
       setCreatedId(body.id)
       setStatus('success')
     } catch (err) {

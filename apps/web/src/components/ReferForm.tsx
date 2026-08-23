@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { VALID_CATEGORIES, categoryLabel, type CategoryName } from '@pil/domain'
+import { track } from '@/lib/analytics'
 
 /**
  * Referral intake. Copy is deliberately gentle and non-labeling: the person being
@@ -47,6 +48,7 @@ export default function ReferForm() {
       })
       const body = await res.json()
       if (!res.ok) throw new Error(body.error ?? 'Could not submit')
+      void track({ name: 'referral_submitted', props: { category: form.category || 'unknown' } })
       setStatus('success')
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Could not submit')
