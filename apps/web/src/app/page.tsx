@@ -2,6 +2,7 @@ import { listPublicCampaigns, prisma } from '@pil/db'
 import CampaignList from '@/components/CampaignList'
 import HowItWorks from '@/components/HowItWorks'
 import LandingBanner from '@/components/LandingBanner'
+import FAQ from '@/components/FAQ'
 
 const PAISE = 100
 
@@ -80,6 +81,8 @@ export default async function Home() {
       <CampaignList campaigns={campaigns} />
 
       <HowItWorks />
+
+      <FAQ />
 
       <div className="about-teaser reveal">
         <p className="kicker">The founding story</p>

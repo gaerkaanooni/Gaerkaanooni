@@ -1749,3 +1749,47 @@ main.narrow .lede {
   white-space: nowrap;
   border: 0;
 }
+
+/* ------------------------------------------------------------------ */
+/* Homepage FAQ (accordion)                                            */
+/* ------------------------------------------------------------------ */
+.faq-list {
+  max-width: 720px;
+  margin: 8px auto 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.faq-item {
+  border: 1px solid var(--line-strong, #211b1033);
+  border-radius: 10px;
+  background: var(--paper-light, #fbf6ea);
+  overflow: hidden;
+}
+.faq-q {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 16px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  font-family: var(--font-display), var(--font-body);
+  font-weight: 600;
+  font-size: 1.02rem;
+  color: var(--ink, #211b10);
+}
+.faq-icon {
+  font-size: 1.2rem;
+  line-height: 1;
+  color: var(--seal, #b3201c);
+}
+.faq-a {
+  margin: 0;
+  padding: 0 16px 14px;
+  color: var(--muted, #6d6246);
+  line-height: 1.7;
+}
