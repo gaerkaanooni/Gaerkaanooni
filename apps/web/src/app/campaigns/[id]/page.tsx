@@ -6,6 +6,7 @@ import UpdateFeed from '@/components/UpdateFeed'
 import BackForm from '@/components/BackForm'
 import FollowButton from '@/components/FollowButton'
 import ViewCampaignTracker from '@/components/ViewCampaignTracker'
+import TrustStrip from '@/components/TrustStrip'
 
 const PUBLIC_STAGES = ['LIVE', 'FUNDED', 'DISPATCHED', 'ASSIGNED', 'FILED', 'IN_PROGRESS', 'RESOLVED', 'CLOSED']
 const ACCEPTING_BACKS = ['LIVE', 'FUNDED', 'DISPATCHED']
@@ -58,6 +59,7 @@ export default async function CampaignPage({ params }: { params: Promise<{ id: s
       </div>
       {ACCEPTING_BACKS.includes(campaign.stage) && (
         <>
+          <TrustStrip />
           <BackForm campaignId={campaign.id} />
           <FollowButton campaignId={campaign.id} />
         </>

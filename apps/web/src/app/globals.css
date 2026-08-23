@@ -1793,3 +1793,80 @@ main.narrow .lede {
   color: var(--muted, #6d6246);
   line-height: 1.7;
 }
+
+/* ------------------------------------------------------------------ */
+/* Trust strip (case detail)                                           */
+/* ------------------------------------------------------------------ */
+.trust-strip {
+  list-style: none;
+  margin: 18px 0 6px;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 18px;
+  border: 1px dashed var(--line-strong, #211b1033);
+  border-radius: 10px;
+  padding: 12px 16px;
+  background: var(--court-green-soft, rgba(12,92,58,.12));
+}
+.trust-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--ink-soft, #3a3120);
+}
+.trust-icon {
+  width: 22px;
+  height: 22px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--court-green, #0c5c3a);
+  color: var(--paper-light, #fbf6ea);
+  font-size: 0.8rem;
+}
+
+/* ------------------------------------------------------------------ */
+/* Referral flow steps                                                 */
+/* ------------------------------------------------------------------ */
+.refer-steps {
+  list-style: none;
+  margin: 22px 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+}
+.refer-step {
+  border: 1px solid var(--line-strong, #211b1033);
+  border-radius: 10px;
+  padding: 14px;
+  background: var(--paper-light, #fbf6ea);
+}
+.refer-step .step-no {
+  display: block;
+  font-family: var(--font-display), var(--font-body);
+  font-weight: 900;
+  color: var(--seal, #b3201c);
+}
+.refer-step h3 {
+  margin: 6px 0 4px;
+  font-size: 1rem;
+}
+.refer-step p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--muted, #6d6246);
+  line-height: 1.6;
+}
+.refer-privacy {
+  border-left: 3px solid var(--seal, #b3201c);
+  padding: 6px 0 6px 12px;
+  margin: 20px 0 0;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--ink-soft, #3a3120);
+}
