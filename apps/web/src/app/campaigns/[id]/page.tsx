@@ -5,6 +5,7 @@ import Countdown from '@/components/Countdown'
 import UpdateFeed from '@/components/UpdateFeed'
 import BackForm from '@/components/BackForm'
 import FollowButton from '@/components/FollowButton'
+import ViewCampaignTracker from '@/components/ViewCampaignTracker'
 
 const PUBLIC_STAGES = ['LIVE', 'FUNDED', 'DISPATCHED', 'ASSIGNED', 'FILED', 'IN_PROGRESS', 'RESOLVED', 'CLOSED']
 const ACCEPTING_BACKS = ['LIVE', 'FUNDED', 'DISPATCHED']
@@ -30,6 +31,7 @@ export default async function CampaignPage({ params }: { params: Promise<{ id: s
 
   return (
     <main>
+      <ViewCampaignTracker campaignId={campaign.id} />
       <p className="detail-category reveal">
         {campaign.category.toLowerCase()} case · {campaign.region ? `${campaign.region} · ` : ''}registry №{' '}
         {campaign.id.slice(0, 8)}

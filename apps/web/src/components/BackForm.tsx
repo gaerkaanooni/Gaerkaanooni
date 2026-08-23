@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { track } from '@/lib/analytics'
 
 interface RazorpayCheckout {
   open: () => void
@@ -77,6 +78,7 @@ export default function BackForm({ campaignId }: { campaignId: string }) {
 
       setContributionId(body.id)
       setGrossPaise(body.amountPaise ?? Math.round(rupees * 100))
+      void track({ name: 'back_intent', props: { campaignId, amountPaise: Math.round(rupees * 100) } })
 
       if (!body.razorpayOrderId) {
         setStep('checkout')
