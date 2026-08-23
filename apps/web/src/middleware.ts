@@ -1,6 +1,8 @@
 import { NextResponse, type NextRequest } from 'next/server'
 import { createMiddlewareClient } from '@/lib/supabase/middleware'
-import { STAFF_SESSION_COOKIE } from '@/lib/auth-session'
+// Edge-safe constant only — importing lib/auth-session here would pull Prisma
+// into the Edge bundle and blow past Vercel's 1 MB middleware size cap.
+import { STAFF_SESSION_COOKIE } from '@/lib/constants'
 
 /**
  * Edge middleware:

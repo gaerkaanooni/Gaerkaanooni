@@ -3,6 +3,7 @@ import crypto from 'crypto'
 import { prisma } from '@pil/db'
 import type { Role } from '@pil/domain'
 import { isSupabaseConfigured } from './supabase/env'
+import { STAFF_SESSION_COOKIE } from './constants'
 
 /**
  * Unified staff session resolution.
@@ -27,7 +28,7 @@ export interface StaffSession {
   role: Role
 }
 
-export const STAFF_SESSION_COOKIE = 'pil_staff_session'
+export { STAFF_SESSION_COOKIE }
 const STAFF_TTL_MS = 30 * 24 * 60 * 60 * 1000
 
 function secret(): string {
