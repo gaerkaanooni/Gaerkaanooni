@@ -32,7 +32,7 @@ export default function Nav({
   }
 
   return (
-    <nav>
+    <nav aria-label="Primary">
       <span className="brand">
         <Link href="/" className="wordmark">
           <Logo size={26} tone="seal" />

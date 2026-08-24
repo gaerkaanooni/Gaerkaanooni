@@ -9,10 +9,13 @@ test.afterAll(async () => {
 
 test('a visitor refers someone through the UI and their contact is stored with consent', async ({ page }) => {
   const referredFor = `Anita ${Date.now()}`
-  await page.goto('/refer')
+  // Referral intake lives on /submit under the "For someone else" mode
+  // (commit 0cefcb4 folded the standalone /refer page into the intake form).
+  await page.goto('/submit', { waitUntil: 'networkidle' })
+  await page.getByRole('button', { name: /for someone else/i }).click()
   await page.getByLabel(/who needs a fair hearing/i).fill(referredFor)
-  await page.getByLabel(/matter about/i).fill('Eviction without notice.')
-  await page.getByLabel(/contact for them/i).fill('anita@example.com')
+  await page.getByLabel(/what happened/i).fill('Eviction without notice.')
+  await page.getByLabel(/a contact for them/i).fill('anita@example.com')
   await page.getByLabel(/happy for us to contact them/i).check()
   await page.getByRole('button', { name: /send this referral/i }).click()
   await expect(page.getByText(/received your referral/i)).toBeVisible()

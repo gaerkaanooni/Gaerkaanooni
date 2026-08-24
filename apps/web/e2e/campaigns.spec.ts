@@ -133,7 +133,8 @@ test('a visitor can submit a case through the UI', async ({ page }) => {
   await page.getByLabel(/what happened/i).fill('Housing discrimination in the colony.')
   await page.getByLabel(/goal/i).fill('25000')
   await page.getByRole('button', { name: /submit/i }).click()
-  await expect(page.getByText(/your submission was received/i)).toBeVisible()
+  // Success panel copy: kicker "Submission received" + h2 "Your case has been submitted".
+  await expect(page.getByText(/submission received|case has been submitted/i).first()).toBeVisible()
 })
 
 test('a visitor can file an urgent response intake through the UI', async ({ page }) => {
@@ -157,7 +158,8 @@ test('a newly registered public user is kept out of the dashboard', async ({ pag
   await loginAsPublic(page, `e2e-${Date.now()}@example.com`)
 
   await page.goto('/dashboard')
-  await expect(page.getByRole('heading', { level: 1 })).toHaveText('Sign in')
+  // Staff guard routes to the staff sign-in (spec 08 §3).
+  await expect(page.getByRole('heading', { level: 1 })).toHaveText('Staff sign in')
 })
 
 test('the analytics page is restricted to admins', async ({ page }) => {

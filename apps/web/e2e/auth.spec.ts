@@ -44,10 +44,15 @@ test.describe('public email-OTP auth', () => {
 
   test('a citizen signs in with Google via the mock provider', async ({ page }) => {
     await page.goto('/login')
+    // Wait for hydration: clicking before React attaches handlers loses the
+    // post-login navigation on a cold dev server.
+    await page.waitForLoadState('networkidle')
     await page.getByRole('button', { name: /continue with google/i }).click()
     await expect(page.getByText(/sign out/i)).toBeVisible()
     await page.goto('/')
-    await expect(page.getByRole('navigation').getByRole('link', { name: /submit a case/i })).toBeVisible()
+    await expect(
+      page.getByRole('navigation', { name: 'Primary' }).getByRole('link', { name: /submit a case/i }),
+    ).toBeVisible()
   })
 
   test('a newly registered public user becomes a PUBLIC role and is barred from staff pages', async ({
@@ -61,12 +66,13 @@ test.describe('public email-OTP auth', () => {
   expect(res.status()).toBe(201)
 
   await loginAsPublic(page, email)
+  // Staff-guarded surfaces all route to the staff sign-in (spec 08 §3).
   await page.goto('/login/staff')
   await expect(page.getByRole('heading', { level: 1 })).toHaveText('Staff sign in')
   await page.goto('/analytics')
-  await expect(page.getByRole('heading', { level: 1 })).toHaveText('Sign in')
+  await expect(page.getByRole('heading', { level: 1 })).toHaveText('Staff sign in')
   await page.goto('/dashboard')
-  await expect(page.getByRole('heading', { level: 1 })).toHaveText('Sign in')
+  await expect(page.getByRole('heading', { level: 1 })).toHaveText('Staff sign in')
 })
 })
 

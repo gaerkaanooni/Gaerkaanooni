@@ -81,6 +81,7 @@ test.describe('case documents RBAC', () => {
     await loginAsPublic(page, `docs-${Date.now()}@example.com`)
 
     await page.goto(`/dashboard/cases/${id}`)
-    await expect(page.getByRole('heading', { level: 1 })).toHaveText('Sign in')
+    // Staff guard routes to the staff sign-in (spec 08 §3).
+    await expect(page.getByRole('heading', { level: 1 })).toHaveText('Staff sign in')
   })
 })

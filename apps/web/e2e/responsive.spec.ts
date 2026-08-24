@@ -1,11 +1,16 @@
 import { expect, test } from '@playwright/test'
 
+// The header nav is labelled "Primary" (the footer's is "Explore") so these
+// locators stay unambiguous now that both exist.
+const primaryNav = (page: import('@playwright/test').Page) =>
+  page.getByRole('navigation', { name: 'Primary' })
+
 test.describe('navigation responsiveness', () => {
   test('mobile shows the hamburger and toggles the menu', async ({ page }) => {
     await page.setViewportSize({ width: 390, height: 844 })
-    await page.goto('/')
+    await page.goto('/', { waitUntil: 'networkidle' })
 
-    const nav = page.getByRole('navigation')
+    const nav = primaryNav(page)
     const toggle = page.getByRole('button', { name: /open menu/i })
     await expect(toggle).toBeVisible()
     await expect(nav.getByRole('link', { name: /submit a case/i })).not.toBeVisible()
@@ -13,7 +18,7 @@ test.describe('navigation responsiveness', () => {
     await toggle.click()
     await expect(page.getByRole('button', { name: /close menu/i })).toBeVisible()
     await expect(nav.getByRole('link', { name: /submit a case/i })).toBeVisible()
-    await expect(nav.getByRole('link', { name: /refer someone/i })).toBeVisible()
+    await expect(nav.getByRole('link', { name: /volunteer/i })).toBeVisible()
     await expect(nav.getByRole('link', { name: /urgent intake/i })).toBeVisible()
     await expect(nav.getByRole('link', { name: /about/i })).toBeVisible()
 
@@ -24,16 +29,16 @@ test.describe('navigation responsiveness', () => {
 
   test('desktop shows the inline links with dot separators', async ({ page }) => {
     await page.setViewportSize({ width: 1280, height: 800 })
-    await page.goto('/')
+    await page.goto('/', { waitUntil: 'networkidle' })
 
-    const nav = page.getByRole('navigation')
+    const nav = primaryNav(page)
     await expect(page.getByRole('button', { name: /open menu/i })).not.toBeVisible()
     const submit = nav.getByRole('link', { name: /submit a case/i })
-    const refer = nav.getByRole('link', { name: /refer someone/i })
+    const volunteer = nav.getByRole('link', { name: /volunteer/i })
     await expect(submit).toBeVisible()
-    await expect(refer).toBeVisible()
+    await expect(volunteer).toBeVisible()
 
-    const separator = await refer.evaluate((el) =>
+    const separator = await volunteer.evaluate((el) =>
       getComputedStyle(el, '::before').content.replace(/['"]/g, ''),
     )
     expect(separator).toBe('·')
