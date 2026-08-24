@@ -12,3 +12,6 @@ playwright-report
 .DS_Store
 *.tsbuildinfo
 .vercel
+
+# vercel cli auth sandbox home
+.vercel-home/

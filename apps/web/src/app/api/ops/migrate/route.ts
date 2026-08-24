@@ -79,7 +79,21 @@ export async function POST(request: Request) {
       SELECT table_name FROM information_schema.tables
       WHERE table_schema = 'public' AND table_name IN ('LawyerApplication', 'AssignmentRequest')
       ORDER BY table_name`
-    return NextResponse.json({ ok: true, applied: SQL.length, tables })
+
+    // Mark the two migrations as applied so `prisma migrate deploy` skips them.
+    await prisma.$executeRawUnsafe(`
+      INSERT INTO "_prisma_migrations" ("id", "checksum", "migration_name", "logs", "started_at", "finished_at", "applied_steps_count")
+      SELECT gen_random_uuid()::text, 'n/a', m.name, 'applied via ops endpoint', now(), now(), 1
+      FROM (VALUES ('20260823222817_add_lawyer_applications'), ('20260823223546_add_assignment_requests')) AS m(name)
+      WHERE NOT EXISTS (
+        SELECT 1 FROM "_prisma_migrations" p
+        WHERE p.migration_name = m.name AND p.finished_at IS NOT NULL AND p.rolled_back_at IS NULL
+      )`)
+    const marked = await prisma.$queryRaw<Array<{ migration_name: string }>>`
+      SELECT migration_name FROM "_prisma_migrations"
+      WHERE migration_name IN ('20260823222817_add_lawyer_applications', '20260823223546_add_assignment_requests')`
+
+    return NextResponse.json({ ok: true, applied: SQL.length, tables, marked })
   } catch (err) {
     return NextResponse.json(
       { ok: false, error: err instanceof Error ? err.message : 'migration failed' },
