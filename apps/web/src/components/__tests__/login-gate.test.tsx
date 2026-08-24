@@ -3,18 +3,21 @@ import { render, screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import LoginGate from '../LoginGate'
 
-const { pushMock, refreshMock } = vi.hoisted(() => ({
-  pushMock: vi.fn(),
-  refreshMock: vi.fn(),
-}))
+// goAfterLogin hard-navigates via window.location.assign (stale-chunk safety);
+// jsdom needs the method stubbed per test.
+const assignMock = vi.fn()
 
 vi.mock('next/navigation', () => ({
-  useRouter: () => ({ push: pushMock, refresh: refreshMock }),
   useSearchParams: () => new URLSearchParams(),
 }))
 
 beforeEach(() => {
   vi.clearAllMocks()
+  Object.defineProperty(window, 'location', {
+    value: { ...window.location, assign: assignMock },
+    writable: true,
+    configurable: true,
+  })
 })
 
 describe('LoginGate', () => {
@@ -35,8 +38,7 @@ describe('LoginGate', () => {
     await userEvent.type(screen.getByLabelText(/6-digit code/i), '123456')
     await userEvent.click(screen.getByRole('button', { name: /^sign in$/i }))
 
-    await waitFor(() => expect(pushMock).toHaveBeenCalledWith('/'))
-    expect(refreshMock).toHaveBeenCalled()
+    await waitFor(() => expect(assignMock).toHaveBeenCalledWith('/'))
   })
 
   it('shows an error when the code is invalid', async () => {
@@ -68,7 +70,7 @@ describe('LoginGate', () => {
     render(<LoginGate />)
     await userEvent.click(screen.getByRole('button', { name: /continue with google/i }))
 
-    await waitFor(() => expect(pushMock).toHaveBeenCalledWith('/'))
+    await waitFor(() => expect(assignMock).toHaveBeenCalledWith('/'))
   })
 
   it('redirects to the Google consent screen when an OAuth url is returned', async () => {
@@ -88,7 +90,7 @@ describe('LoginGate', () => {
     await userEvent.click(screen.getByRole('button', { name: /continue with google/i }))
 
     await waitFor(() => expect(window.location.href).toBe('https://accounts.google.com/o/oauth2/auth?x=1'))
-    expect(pushMock).not.toHaveBeenCalled()
+    expect(assignMock).not.toHaveBeenCalled()
   })
 
   it('returns to the email step and resends to a new address', async () => {

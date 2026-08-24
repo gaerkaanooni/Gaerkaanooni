@@ -37,9 +37,11 @@ test.describe('public email-OTP auth', () => {
     await loginAsPublic(page, `signout-${Date.now()}@example.com`)
 
     await page.getByRole('button', { name: /sign out/i }).click()
-    await expect(page.getByText(/sign in/i).first()).toBeVisible()
-    await page.goto('/')
-    await expect(page.getByRole('link', { name: /sign in/i })).toBeVisible()
+    // Sign-out hard-navigates; the fresh document shows "Sign in" again.
+    await expect(
+      page.getByRole('navigation', { name: 'Primary' }).getByRole('link', { name: /sign in/i }),
+    ).toBeVisible({ timeout: 15_000 })
+    await expect(page.getByRole('button', { name: /sign out/i })).toHaveCount(0)
   })
 
   test('a citizen signs in with Google via the mock provider', async ({ page }) => {
@@ -101,10 +103,12 @@ test.describe('staff auth', () => {
     await page.getByLabel(/email/i).fill('staff@example.com')
     await page.getByLabel(/password/i).fill('staff-pass-123')
     await page.getByRole('button', { name: /sign in/i }).click()
+    await page.waitForURL('**/dashboard', { timeout: 15_000 })
     await expect(page.getByText(/sign out/i)).toBeVisible()
 
     await page.getByRole('button', { name: /sign out/i }).click()
-    await expect(page).toHaveURL(/\/$/)
+    // Hard navigation home after the logout POST — allow for a cold route.
+    await page.waitForURL(/\/$|\/\?/, { timeout: 20_000 })
 
     const res = await request.get('/dashboard', { maxRedirects: 0 })
     expect(res.status()).toBe(307)

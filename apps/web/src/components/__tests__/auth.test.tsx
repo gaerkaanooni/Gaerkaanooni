@@ -4,20 +4,25 @@ import userEvent from '@testing-library/user-event'
 import LoginForm from '../LoginForm'
 import RegisterForm from '../RegisterForm'
 
-const { pushMock, refreshMock } = vi.hoisted(() => ({
-  pushMock: vi.fn(),
-  refreshMock: vi.fn(),
-}))
+// LoginForm hard-navigates via window.location.assign (stale-chunk safety).
+const assignMock = vi.fn()
+const pushMock = vi.fn()
+const refreshMock = vi.fn()
 
 vi.mock('next/navigation', () => ({
   useRouter: () => ({ push: pushMock, refresh: refreshMock }),
 }))
 
-describe('LoginForm', () => {
-  beforeEach(() => {
-    vi.clearAllMocks()
+beforeEach(() => {
+  vi.clearAllMocks()
+  Object.defineProperty(window, 'location', {
+    value: { ...window.location, assign: assignMock },
+    writable: true,
+    configurable: true,
   })
+})
 
+describe('LoginForm', () => {
   it('posts credentials to the unified staff login and navigates to the dashboard on success', async () => {
     const fetchMock = vi
       .fn()
@@ -38,7 +43,7 @@ describe('LoginForm', () => {
         }),
       ),
     )
-    expect(pushMock).toHaveBeenCalledWith('/dashboard')
+    expect(assignMock).toHaveBeenCalledWith('/dashboard')
   })
 
   it('shows an error on failed credentials', async () => {

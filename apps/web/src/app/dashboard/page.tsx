@@ -1,7 +1,7 @@
 import { redirect } from 'next/navigation'
 import { getStaffSession } from '@/lib/auth-session'
 import { canPerform, type Role } from '@pil/domain'
-import { getCaseList, getFinancialSummary, getVolunteerDirectory, prisma } from '@pil/db'
+import { getAnalytics, getCaseList, getFinancialSummary, getVolunteerDirectory, prisma } from '@pil/db'
 import CaseTable from '@/components/CaseTable'
 import VolunteerDirectory from '@/components/VolunteerDirectory'
 import FinancialSummaryCard from '@/components/FinancialSummaryCard'
@@ -9,20 +9,28 @@ import DashboardKpis, { type StageCounts } from '@/components/DashboardKpis'
 import ReferralsList from '@/components/ReferralsList'
 import LawyerApplicationsQueue from '@/components/LawyerApplicationsQueue'
 import VolunteerRequestsQueue from '@/components/VolunteerRequestsQueue'
+import AnalyticsPanel from '@/components/AnalyticsPanel'
 
 export const dynamic = 'force-dynamic'
 
+/**
+ * The single ops console: KPIs, finances, cases, volunteers, intake queues —
+ * and, for admins, the analytics readout (previously a separate /analytics
+ * page). One page, one scroll, everything staff need day to day.
+ */
 export default async function DashboardPage() {
   const session = await getStaffSession()
   if (!session || !canPerform(session.role as Role, 'dashboard.view')) {
     redirect('/login/staff')
   }
+  const isAdmin = canPerform(session.role as Role, 'finance.view')
 
-  const [cases, volunteers, finances, stageGroups] = await Promise.all([
+  const [cases, volunteers, finances, stageGroups, analytics] = await Promise.all([
     getCaseList(prisma),
     getVolunteerDirectory(prisma),
     getFinancialSummary(prisma),
     prisma.case.groupBy({ by: ['stage'], _count: { _all: true } }),
+    isAdmin ? getAnalytics(prisma) : Promise.resolve(null),
   ])
 
   const countFor = (stage: string) =>
@@ -42,6 +50,15 @@ export default async function DashboardPage() {
         <h2>Finances</h2>
         <FinancialSummaryCard summary={finances} />
       </section>
+      {analytics && (
+        <section aria-label="Analytics" id="analytics">
+          <h2>Analytics</h2>
+          <p className="section-lede">
+            Platform-wide readout for admins: pipeline totals, money, conversion and weekly activity.
+          </p>
+          <AnalyticsPanel analytics={analytics} />
+        </section>
+      )}
       <section aria-label="Cases">
         <h2>Cases</h2>
         <CaseTable rows={cases} />

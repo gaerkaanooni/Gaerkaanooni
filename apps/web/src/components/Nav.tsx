@@ -1,14 +1,12 @@
 'use client'
 
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import Logo from '@/components/Logo'
 
 export default function Nav({
   signedIn,
   isStaff,
-  isAdmin,
   kind,
 }: {
   signedIn: boolean
@@ -16,19 +14,17 @@ export default function Nav({
   isAdmin?: boolean
   kind?: 'staff' | 'public' | null
 }) {
-  const router = useRouter()
   const [open, setOpen] = useState(false)
 
   async function handleSignOut() {
     if (kind === 'staff') {
       await fetch('/api/staff/logout', { method: 'POST' })
-      router.push('/')
-      router.refresh()
-      return
+    } else {
+      await fetch('/api/public-auth/logout', { method: 'POST' })
     }
-    await fetch('/api/public-auth/logout', { method: 'POST' })
-    router.push('/')
-    router.refresh()
+    // Hard navigation: guarantees the cleared session is reflected even when
+    // the tab holds stale client chunks after a redeploy.
+    window.location.assign('/')
   }
 
   return (
@@ -69,7 +65,6 @@ export default function Nav({
         {signedIn ? (
           <>
             {isStaff && <Link href="/dashboard">Dashboard</Link>}
-            {isAdmin && <Link href="/analytics">Analytics</Link>}
             <button className="signout" onClick={handleSignOut}>
               Sign out
             </button>

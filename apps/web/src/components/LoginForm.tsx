@@ -1,7 +1,6 @@
 'use client'
 
 import { useState } from 'react'
-import { useRouter } from 'next/navigation'
 import { track } from '@/lib/analytics'
 
 /**
@@ -9,7 +8,6 @@ import { track } from '@/lib/analytics'
  * so the dashboard guard and role checks resolve through the same path.
  */
 export default function LoginForm() {
-  const router = useRouter()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
@@ -28,8 +26,9 @@ export default function LoginForm() {
       const body = await res.json()
       if (!res.ok) throw new Error(body.error ?? 'Invalid email or password')
       void track({ name: 'login_complete', props: { provider: 'password' } })
-      router.push('/dashboard')
-      router.refresh()
+      // Hard navigation on purpose: a fresh document load can never be stranded
+      // by stale client chunks after a redeploy (the "Signing in… forever" bug).
+      window.location.assign('/dashboard')
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Invalid email or password')
     } finally {

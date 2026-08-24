@@ -162,14 +162,15 @@ test('a newly registered public user is kept out of the dashboard', async ({ pag
   await expect(page.getByRole('heading', { level: 1 })).toHaveText('Staff sign in')
 })
 
-test('the analytics page is restricted to admins', async ({ page }) => {
+test('analytics live inside the admin dashboard', async ({ page }) => {
   await page.goto('/login/staff')
   await page.getByLabel(/email/i).fill('admin@example.com')
   await page.getByLabel(/password/i).fill('staff-pass-123')
   await page.getByRole('button', { name: /sign in/i }).click()
   await expect(page.getByText(/sign out/i)).toBeVisible()
 
-  await page.goto('/analytics')
-  await expect(page.getByRole('heading', { level: 1 })).toHaveText('Analytics')
-  await expect(page.getByText(/total raised/i).or(page.getByText(/Totals/))).toBeVisible()
+  // Admins see the analytics readout as a section of the single ops console.
+  await expect(page.getByRole('heading', { level: 1 })).toHaveText('Operations dashboard')
+  await expect(page.getByRole('heading', { name: 'Analytics', exact: true })).toBeVisible()
+  await expect(page.getByText(/total raised/i).or(page.getByText(/Totals/)).first()).toBeVisible()
 })

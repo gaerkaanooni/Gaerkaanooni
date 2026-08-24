@@ -81,6 +81,8 @@ export async function loginAsStaff(page: Page): Promise<void> {
   await page.getByLabel(/email/i).fill('staff@example.com')
   await page.getByLabel(/password/i).fill('staff-pass-123')
   await page.getByRole('button', { name: /sign in/i }).click()
+  // Login hard-navigates (window.location.assign) — wait for the new document.
+  await page.waitForURL('**/dashboard', { timeout: 15_000 })
   await expect(page.getByText(/sign out/i)).toBeVisible()
 }
 
@@ -89,6 +91,7 @@ export async function loginAsAdmin(page: Page): Promise<void> {
   await page.getByLabel(/email/i).fill('admin@example.com')
   await page.getByLabel(/password/i).fill('staff-pass-123')
   await page.getByRole('button', { name: /sign in/i }).click()
+  await page.waitForURL('**/dashboard', { timeout: 15_000 })
   await expect(page.getByText(/sign out/i)).toBeVisible()
 }
 
@@ -99,6 +102,7 @@ export async function loginAsPublic(page: Page, email: string): Promise<void> {
   const devCode = await page.getByText(/your code is/i).locator('strong').textContent()
   await page.getByLabel(/6-digit code/i).fill(devCode ?? '')
   await page.getByRole('button', { name: /^sign in$/i }).click()
+  await page.waitForURL(u => !u.pathname.startsWith('/login'), { timeout: 15_000 })
   await expect(page.getByText(/sign out/i)).toBeVisible()
 }
 

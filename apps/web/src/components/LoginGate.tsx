@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useCallback } from 'react'
-import { useRouter, useSearchParams } from 'next/navigation'
+import { useSearchParams } from 'next/navigation'
 import { track } from '@/lib/analytics'
 
 type Step = 'email' | 'code'
@@ -15,7 +15,6 @@ const INTENT_DEST: Record<string, string> = {
 }
 
 export default function LoginGate() {
-  const router = useRouter()
   const searchParams = useSearchParams()
   const [step, setStep] = useState<Step>('email')
   const [email, setEmail] = useState('')
@@ -27,10 +26,11 @@ export default function LoginGate() {
   const intent = searchParams.get('intent') ?? ''
   const afterLogin = INTENT_DEST[intent] ?? '/'
 
+  // Hard navigation on purpose: a fresh document load can never be stranded by
+  // stale client chunks after a redeploy (the "Signing in… forever" bug).
   const goAfterLogin = useCallback(() => {
-    router.push(afterLogin)
-    router.refresh()
-  }, [afterLogin, router])
+    window.location.assign(afterLogin)
+  }, [afterLogin])
 
   async function sendOtp(e: React.FormEvent) {
     e.preventDefault()
