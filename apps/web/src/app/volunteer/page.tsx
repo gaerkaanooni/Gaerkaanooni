@@ -21,6 +21,26 @@ export default async function VolunteerPage() {
   const user = await getPublicUser()
 
   if (!user) {
+    const commitments = [
+      {
+        no: '01',
+        title: 'You choose the matters',
+        body:
+          'See each case before you commit. Nothing reaches your desk without your offer being made and confirmed.',
+      },
+      {
+        no: '02',
+        title: 'Capacity is a promise we keep',
+        body:
+          'Set a concurrent-case limit you can honour alongside your practice. The platform blocks work beyond it.',
+      },
+      {
+        no: '03',
+        title: 'Every hour counts',
+        body:
+          'Logged pro-bono hours are audited and reported back for bar recognition and CSR reporting.',
+      },
+    ]
     return (
       <main className="narrow">
         <p className="detail-category reveal">Pro bono · volunteer panel</p>
@@ -30,20 +50,15 @@ export default async function VolunteerPage() {
           matters, offer counsel on funded campaigns, and log every hour toward pro-bono certificates
           and CSR reports. You set your own capacity — we never assign beyond it.
         </p>
-        <ul className="principles">
-          <li className="principle">
-            <strong>You choose the matters.</strong> See each case before you commit; nothing is
-            assigned to you without your offer being confirmed.
-          </li>
-          <li className="principle">
-            <strong>Capacity is a promise we keep.</strong> Set a concurrent-case limit; the platform
-            blocks work beyond it.
-          </li>
-          <li className="principle">
-            <strong>Every hour counts.</strong> Logged hours are audited and reported back to you for
-            bar pro-bono recognition.
-          </li>
-        </ul>
+        <div className="principles">
+          {commitments.map((c, i) => (
+            <div className={`principle reveal d${i + 1}`} key={c.no}>
+              <span className="step-no">{c.no}</span>
+              <h3>{c.title}</h3>
+              <p>{c.body}</p>
+            </div>
+          ))}
+        </div>
         <div className="cta-row">
           <Link className="button" href="/login?intent=volunteer">
             Sign in to apply
